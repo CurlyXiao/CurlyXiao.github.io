@@ -464,7 +464,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    4.5k
+                    1.9k
                 </div>
                 
 
@@ -501,9 +501,8 @@
 <li>版本空间：有多个假设与训练集一致，即存在一个与训练集一致的“假设集合”</li>
 </ul>
 <h3 id="1-4归纳偏好"><a href="#1-4归纳偏好" class="headerlink" title="1.4归纳偏好"></a>1.4归纳偏好</h3><ul>
-<li><p>“归纳偏好”：机器学习算法在学习过程中对某种类型假设的偏好</p>
-</li>
-<li><p>最基本的原则–“奥卡姆剃刀”</p>
+<li>“归纳偏好”：机器学习算法在学习过程中对某种类型假设的偏好</li>
+<li><p>最基本的原则—“奥卡姆剃刀”</p>
 </li>
 <li><p>NFL定理：所有学习算法的期望性能一致</p>
 <p><strong>算法的优劣选择要结合具体的问题！！！</strong></p>
@@ -560,16 +559,16 @@
 <p>​    对于二分类问题，混淆矩阵如图所示：</p>
 <p><img src="https://img-blog.csdnimg.cn/20200818170300510.png#pic_center" alt="img"></p>
 <p>​    <strong>1.准确率：</strong>预测出来为正类中真正的正类所占的比例。</p>
-<p>​            $$P=\frac{TP}{TP+FP}$$</p>
+<p>​            <script type="math/tex">P=\frac{TP}{TP+FP}</script></p>
 <p>​    <strong>2.召回率：</strong>预测出来正确的正类占所有真实正类的比例。</p>
-<p>​            $$F=\frac{TP}{TP+FN}$$​</p>
+<p>​            <script type="math/tex">F=\frac{TP}{TP+FN}</script>​</p>
 <p>​        <strong>准确率和召回率是一对矛盾的度量</strong></p>
 <p>​    <strong>3.P-R图</strong>（准确率-召回率曲线)：完全”包住“其他曲线的曲线越优，比如B优于C</p>
-<img src="https://img2018.cnblogs.com/blog/1102791/201812/1102791-20181218144651971-1165973699.png" alt="P-R图" style="zoom: 80%;">
-
+<p><img src="https://img2018.cnblogs.com/blog/1102791/201812/1102791-20181218144651971-1165973699.png" alt="P-R图" style="zoom: 80%;"></p>
 <p>​    <strong>4. F1-Score</strong></p>
 <p>​    因为难以比较A和B孰优孰劣，所以有了几个综合考虑准确率、召回率的性能度量</p>
-<p>​    **平衡点(BEP)**：它是”准确率=召回率“时的取值(太过于简化了)</p>
+<p>​    <strong>平衡点(BEP)</strong>：它是”准确率=召回率“时的取值(太过于简化了)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -577,30 +576,37 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>基于查准率与查全率的调和平均</td>
 <td>$\frac{1}{F_1}=\frac{1}{2}·(\frac{1}{P}+\frac{1}{F})$  即：$F_1=\frac{2\times F\times R}{F+R}=\frac{2\times TP}{样本总数+TP-TN}$​​</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<div class="table-container">
 <table>
 <thead>
 <tr>
-<th align="left">$F_\beta$</th>
+<th style="text-align:left">$F_\beta$</th>
 <th>$F_\beta=\frac{1}{1+\beta^2}·(\frac{1}{P}+\frac{\beta^2}{R})$</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">加权调和平均(表达出对准确率和召回率的不同偏好)</td>
+<tbody>
+<tr>
+<td style="text-align:left">加权调和平均(表达出对准确率和召回率的不同偏好)</td>
 <td>其中，$\beta$度量了召回率对准确率的相对重要性，$\beta&gt;1$召回率更重要，$\beta&lt;1$准确率更重要</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>注：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23096098/answer/513277869">关于调和平均数的理解</a></p>
 <p>很多时候，我们进行多次训练/测试得到多个混淆矩阵，</p>
 <p>此时有两种方法综合考虑准确率和召回率：</p>
 <ol>
 <li><p><strong>”宏F1(macro-F1)</strong>:算出每个混淆矩阵的准确率和召回率，进行平均,得到宏准确率和宏召回率</p>
 </li>
-<li><p> <strong>”微F1(micro-F1)</strong>:对混淆矩阵的对应元素进行平均，得到TP、FP、TN、FN的平均值，再算微准确率和微召回率</p>
+<li><p><strong>”微F1(micro-F1)</strong>:对混淆矩阵的对应元素进行平均，得到TP、FP、TN、FN的平均值，再算微准确率和微召回率</p>
 </li>
 </ol>
 <h5 id="（3）ROC和AUC"><a href="#（3）ROC和AUC" class="headerlink" title="（3）ROC和AUC"></a>（3）ROC和AUC</h5><p>​    <strong>1.ROC</strong></p>
@@ -630,20 +636,23 @@
 <p>​    当我们评价多个预测器指标的时候，如果一个预测器的ROC完全<strong>包住</strong>了另外一个预测器的ROC，那么前者性能优于后者，但是如果有<strong>交叉</strong>的部分，就需要比较两者的AUC了。</p>
 <p>​    </p>
 <p><strong>2.AUC</strong></p>
-<p>​        AUC（Area Under ROC Curve），指的是ROC曲线下面的面积，用于评估ROC曲线的性能。<br>$$<br>AUC=\frac{1}{2}\sum_{i=1}^{m-1}(x_{i+1}-x_i)(y_i+y_{i+1})<br>$$<br>​        注：就是一个梯形面积的公式</p>
-<p><strong>3.排序”损失“（loss)</strong><br>$$<br>ℓ_{rank}=\frac{1}{m^+m^-}\sum_{x^+\in D^+}\sum_{x^-\in D^-}(\mathbb I(f(x^+)&lt;f(x^-))+\mathbb I(f(x^+)=f(x^-)))<br>$$<br>​    即考虑每对正、反例，若正例的预测值小于反例，则记一个”罚分“，若相等，记0.5个罚分。</p>
-<p>​    <a href="%5B(19%E6%9D%A1%E6%B6%88%E6%81%AF">推导过程</a> 机器学习公式推导【Day3】排序损失loss_努力上进的小叶-CSDN博客_排序损失](<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43246110/article/details/104650262">https://blog.csdn.net/qq_43246110/article/details/104650262</a>))</p>
+<p>​        AUC（Area Under ROC Curve），指的是ROC曲线下面的面积，用于评估ROC曲线的性能。</p>
+<script type="math/tex; mode=display">
+AUC=\frac{1}{2}\sum_{i=1}^{m-1}(x_{i+1}-x_i)(y_i+y_{i+1})</script><p>​        注：就是一个梯形面积的公式</p>
+<p><strong>3.排序”损失“（loss)</strong></p>
+<script type="math/tex; mode=display">
+ℓ_{rank}=\frac{1}{m^+m^-}\sum_{x^+\in D^+}\sum_{x^-\in D^-}(\mathbb I(f(x^+)<f(x^-))+\mathbb I(f(x^+)=f(x^-)))</script><p>​    即考虑每对正、反例，若正例的预测值小于反例，则记一个”罚分“，若相等，记0.5个罚分。</p>
+<p>​    <a href="[(19条消息">推导过程</a> 机器学习公式推导【Day3】排序损失loss_努力上进的小叶-CSDN博客_排序损失](<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43246110/article/details/104650262">https://blog.csdn.net/qq_43246110/article/details/104650262</a>))</p>
 <p>​    容易有：$AUC=1-ℓ_{rank}$</p>
 <h5 id="（4）代价敏感错误率与代价曲线"><a href="#（4）代价敏感错误率与代价曲线" class="headerlink" title="（4）代价敏感错误率与代价曲线"></a>（4）代价敏感错误率与代价曲线</h5><p>​    不同类型的错误会造成不同的代价，因此为了权衡不同类型错误所造成的不同损失，可为错误赋予”非均等代价“。</p>
 <p>​    二分类问题中</p>
 <p>​    代价矩阵：<img src="https://pic3.zhimg.com/v2-851291a93a18d269c18f6de3033c36d2_r.jpg" alt="preview"></p>
 <p>​    ”代价敏感“错误率为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=E(f;D;cost)=%5Cfrac1m+(%5Csum_%7Bx_i%5Cin+D%5E+%7Dfunc(f(x_i)%5Cneq+y_i)*cost_%7B01%7D+%5Csum_%7Bx_i%5Cin+D%5E-%7Dfunc(f(x_i)%5Cneq+y_i)*cost_%7B10%7D)" alt="[公式]"></p>
-<p>​    在非均等条件下，用**”代价曲线“(Cost Curve)**来反映出模型的期望总体代价</p>
+<p><img src="https://www.zhihu.com/equation?tex=E%28f%3BD%3Bcost%29%3D%5Cfrac1m+%28%5Csum_%7Bx_i%5Cin+D%5E%2B%7Dfunc%28f%28x_i%29%5Cneq+y_i%29%2Acost_%7B01%7D%2B%5Csum_%7Bx_i%5Cin+D%5E-%7Dfunc%28f%28x_i%29%5Cneq+y_i%29%2Acost_%7B10%7D%29" alt="[公式]"></p>
+<p>​    在非均等条件下，用<strong>”代价曲线“(Cost Curve)</strong>来反映出模型的期望总体代价</p>
 <p>​    代价曲线的横轴是取值为[0,1]的正例概率代价，其中$p$是正例概率</p>
 <p>​    纵轴是取值为[0,1]的归一化代价</p>
-<img src="https://pic2.zhimg.com/v2-23bb5a729c18bfc9a18278fd0c4d9aef_r.jpg?source=1940ef5c" style="zoom:80%;">
-
+<p><img src="https://pic2.zhimg.com/v2-23bb5a729c18bfc9a18278fd0c4d9aef_r.jpg?source=1940ef5c" style="zoom:80%;"></p>
 <p>​    代价曲线如下图所示：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-009855d0fa9287349bf4c55964f7160e_720w.jpg?source=1940ef5c" alt="img"></p>
 <p>​    <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/63492375">代价曲线的理解？</a></p>
@@ -657,7 +666,7 @@
 <p>​    1.Friedman检验</p>
 <p>​    2.Nemenyi后续检验</p>
 <h3 id="2-5-偏差与方差"><a href="#2-5-偏差与方差" class="headerlink" title="2.5 偏差与方差"></a>2.5 偏差与方差</h3><p><strong>1.泛化误差</strong></p>
-<p><img src="https://www.zhihu.com/equation?tex=E(f,D)=bias%5E%7B2%7D(x)+var(x)+%5Cvarepsilon%5E%7B2%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=E%28f%2CD%29%3Dbias%5E%7B2%7D%28x%29%2Bvar%28x%29%2B%5Cvarepsilon%5E%7B2%7D" alt="[公式]"></p>
 <p>​    泛化误差可分解为偏差、方差与噪声之和</p>
 <ul>
 <li><p>偏差：度量了模型的期望预测和真实结果的偏离程度，刻画了<strong>模型本身的拟合能力</strong>。</p>
@@ -666,8 +675,7 @@
 </li>
 <li><p>噪声：表达了当前任务上任何模型所能达到的期望泛化误差的下界，<strong>刻画了学习问题本身的难度</strong>。</p>
 </li>
-<li><p>即泛化性能由算法的学习能力、数据的充分性以及学习任务本身的难度决定的</p>
-</li>
+<li>即泛化性能由算法的学习能力、数据的充分性以及学习任务本身的难度决定的</li>
 </ul>
 <p><strong>2.偏差-方差窘境：</strong></p>
 <p>​    下图给出了在模型训练不足时，拟合能力不够强，训练数据的扰动不足以使学习器产生显著变化，此时偏差主导泛化误差，此时称为欠拟合现象。当随着训练程度加深，模型的拟合能力增强，训练数据的扰动慢慢使得方差主导泛化误差。当训练充足时，模型的拟合能力非常强，数据轻微变化都能导致模型发生变化，如果过分学习训练数据的特点，则会发生过拟合。</p>
@@ -687,7 +695,20 @@
 <h3 id="3-1-回归任务"><a href="#3-1-回归任务" class="headerlink" title="3.1 回归任务"></a>3.1 回归任务</h3><h4 id="（1）线性回归"><a href="#（1）线性回归" class="headerlink" title="（1）线性回归"></a>（1）线性回归</h4><p>​    对于离散属性，若属性值间存在“序”关系，可通过连续化将其转化为连续；若不存在序关系，则通常转化为k维向量。</p>
 <p>​    对于<strong>“多元线性回归”</strong>试图学得：</p>
 <p>​        $f(\bold x_i)=\bold \omega ^T \bold x_i+b,$使得$f(x_i)\simeq y_i$</p>
-<p>​    把数据集D表示成一个$m\times(d+1)$​大小的矩阵：<br>$$<br>X=\begin{pmatrix}<br> x_{11} &amp; x_{12} &amp; \dots &amp; x_{1d} &amp; 1\<br> x_{21} &amp; x_{22} &amp; \dots &amp; x_{2d} &amp; 1 \<br> \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots\<br> x_{m1} &amp; x_{m2} &amp; \dots &amp; x_{md} &amp; 1<br> \end{pmatrix}<br> =\begin{pmatrix}<br> \bold x_1^T &amp; 1\<br> \bold x_2^T &amp; 1 \<br> \vdots &amp; \vdots\<br> \bold x_m^T &amp; 1<br> \end{pmatrix}<br>$$<br>​    把标记也写成向量模式$\bold y=(y_1;y_2;\dots;y_m)$</p>
+<p>​    把数据集D表示成一个$m\times(d+1)$​大小的矩阵：</p>
+<script type="math/tex; mode=display">
+X=\begin{pmatrix}
+ x_{11} & x_{12} & \dots & x_{1d} & 1\\
+ x_{21} & x_{22} & \dots & x_{2d} & 1 \\
+ \vdots & \vdots & \ddots & \vdots & \vdots\\
+ x_{m1} & x_{m2} & \dots & x_{md} & 1
+ \end{pmatrix}
+ =\begin{pmatrix}
+ \bold x_1^T & 1\\
+ \bold x_2^T & 1 \\
+ \vdots & \vdots\\
+ \bold x_m^T & 1
+ \end{pmatrix}</script><p>​    把标记也写成向量模式$\bold y=(y_1;y_2;\dots;y_m)$</p>
 <p>​    有：$\hat{\omega}^*=\mathop{argmin}\limits_{\hat{\omega}}(\bold y-\bold X\hat{\omega})^T(\bold y-\bold X\hat{\omega})$​（使均方误差最小）</p>
 <p>​    通过最小二乘法对$\omega$和$b$进行估计</p>
 <p>​    若$X^TX$为满秩或正定矩阵，最终学得的多元线性回归模型为：</p>
@@ -699,19 +720,18 @@
 <p>广义线性模型的参数估计一般通过加权最小二乘法或者极大似然法进行</p>
 <h3 id="3-2-分类任务"><a href="#3-2-分类任务" class="headerlink" title="3.2 分类任务"></a>3.2 分类任务</h3><h4 id="（2）对数几率回归"><a href="#（2）对数几率回归" class="headerlink" title="（2）对数几率回归"></a>（2）对数几率回归</h4><p>​    我们知道线性回归模型预测的是一个值，但如果我们要做的是分类任务呢？</p>
 <p>​    其实就是要找广义线性模型的”联系函数”(link function)，让这个函数将分类任务的真实标记与线性回归的预测值联系起来即可。</p>
-<p>​    考虑二分类任务，其输出标记 <img src="https://www.zhihu.com/equation?tex=y+%5Cin+%5C%7B0,+1%5C%7D" alt="[公式]"> ，而线性模型产生的预测值<img src="https://www.zhihu.com/equation?tex=z=w%5E%7BT%7Dx+b" alt="[公式]"> 是实值，于是，我们需将 <img src="https://www.zhihu.com/equation?tex=z" alt="[公式]"> 转换为 0/1值，最理想的是”单位阶跃函数”(unit-step function)</p>
-<p><img src="https://www.zhihu.com/equation?tex=y=+%5Cbegin%7Bcases%7D+0,+&amp;+z+%3C+0+%5C%5C%5C%5C+0.5,+&amp;z+=+0+%5C%5C%5C%5C+1,+&amp;z+%3E+0++%5Cend%7Bcases%7D+%5Ctag%7B1%7D" alt="[公式]"></p>
+<p>​    考虑二分类任务，其输出标记 <img src="https://www.zhihu.com/equation?tex=y+%5Cin+%5C%7B0%2C+1%5C%7D" alt="[公式]"> ，而线性模型产生的预测值<img src="https://www.zhihu.com/equation?tex=z%3Dw%5E%7BT%7Dx%2Bb" alt="[公式]"> 是实值，于是，我们需将 <img src="https://www.zhihu.com/equation?tex=z" alt="[公式]"> 转换为 0/1值，最理想的是”单位阶跃函数”(unit-step function)</p>
+<p><img src="https://www.zhihu.com/equation?tex=y%3D+%5Cbegin%7Bcases%7D+0%2C+%26+z+%3C+0+%5C%5C%5C%5C+0.5%2C+%26z+%3D+0+%5C%5C%5C%5C+1%2C+%26z+%3E+0++%5Cend%7Bcases%7D+%5Ctag%7B1%7D" alt="[公式]"></p>
 <p>即若预测值 <img src="https://www.zhihu.com/equation?tex=z" alt="[公式]"> 大于零就判定为正例，小于零，则判定为反例，预测值如果为临界值零则可任意判别，如图1所示：</p>
-<img src="https://pic3.zhimg.com/80/v2-20318cc5094a39c05d812653a7ce087a_720w.jpg" alt="图1 单位跃阶函数与对数几率函数" style="zoom:50%;">
-
+<p><img src="https://pic3.zhimg.com/80/v2-20318cc5094a39c05d812653a7ce087a_720w.jpg" alt="图1 单位跃阶函数与对数几率函数" style="zoom:50%;"></p>
 <p>​                                                                                        图1 单位跃阶函数与对数几率函数</p>
 <p>单位阶跃函数不连续（影响后期求最优解[<strong>牛顿法，梯度下降法等</strong>]），于是我们希望找到能一定程度上近似单位阶跃函数的”替代函数”(surrogate function)，并希望它单调可微。对数几率函数(logistic function)正是这样的一个替代函数：</p>
-<p><img src="https://www.zhihu.com/equation?tex=y=%5Cfrac%7B1%7D%7B1+e%5E%7B-z%7D%7D+%5Ctag%7B2%7D" alt="[公式]"></p>
-<p>对数几率函数是一种”Sigmoid函数”，它将 <img src="https://www.zhihu.com/equation?tex=z" alt="[公式]"> 值转化为一个接近0或1的 <img src="https://www.zhihu.com/equation?tex=y" alt="[公式]"> 值，并且在 <img src="https://www.zhihu.com/equation?tex=z=0" alt="[公式]"> 附近变化很陡.</p>
-<p>我们把 <img src="https://www.zhihu.com/equation?tex=z=w%5E%7BT%7Dx+b" alt="[公式]"> 代入到式(2)中，得：</p>
-<p><img src="https://www.zhihu.com/equation?tex=y=%5Cfrac%7B1%7D%7B1+e%5E%7B-(w%5E%7B%5Crm%7BT%7D%7Dx+b)%7D%7D+%5Ctag%7B3%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=y%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-z%7D%7D+%5Ctag%7B2%7D" alt="[公式]"></p>
+<p>对数几率函数是一种”Sigmoid函数”，它将 <img src="https://www.zhihu.com/equation?tex=z" alt="[公式]"> 值转化为一个接近0或1的 <img src="https://www.zhihu.com/equation?tex=y" alt="[公式]"> 值，并且在 <img src="https://www.zhihu.com/equation?tex=z%3D0" alt="[公式]"> 附近变化很陡.</p>
+<p>我们把 <img src="https://www.zhihu.com/equation?tex=z%3Dw%5E%7BT%7Dx%2Bb" alt="[公式]"> 代入到式(2)中，得：</p>
+<p><img src="https://www.zhihu.com/equation?tex=y%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-%28w%5E%7B%5Crm%7BT%7D%7Dx%2Bb%29%7D%7D+%5Ctag%7B3%7D" alt="[公式]"></p>
 <p>式(3)可变化为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cln+%5Cfrac%7By%7D%7B1-y%7D=w%5E%7B%5Crm%7BT%7D%7Dx+b+%5Ctag%7B4%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Cln+%5Cfrac%7By%7D%7B1-y%7D%3Dw%5E%7B%5Crm%7BT%7D%7Dx%2Bb+%5Ctag%7B4%7D" alt="[公式]"></p>
 <p>若将 <img src="https://www.zhihu.com/equation?tex=y" alt="[公式]"> 视为样本 <img src="https://www.zhihu.com/equation?tex=x" alt="[公式]"> 作为正例的可能性，则 <img src="https://www.zhihu.com/equation?tex=1-y" alt="[公式]"> 是其反例的可能性，两者的比值：</p>
 <p><img src="https://www.zhihu.com/equation?tex=%5Cfrac%7By%7D%7B1-y%7D+%5Ctag%7B5%7D" alt="[公式]"></p>
 <p>称为”几率”(odds)，反映了 <img src="https://www.zhihu.com/equation?tex=x" alt="[公式]"> 作为<strong>正例的相对可能性。</strong>对几率取对数得到<strong>对数几率</strong>(log odds，亦称logit)：</p>
@@ -720,27 +740,27 @@
 <p>这种方法有很多<strong>优点</strong>：</p>
 <p>① 它是直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题；<br>② 它不仅预测类别，也可得到近似概率预测，这对许多需利用概率辅助决策的任务很有用；<br>③ 对率回归求解的目标函数是任意阶可导的凸函数，有很好的数学性质，现有的许多数值优化算法都可直接用于求取<strong>最优解</strong>。</p>
 <p>如何确定式(3)的 <img src="https://www.zhihu.com/equation?tex=w" alt="[公式]"> 和 <img src="https://www.zhihu.com/equation?tex=b" alt="[公式]"> ？</p>
-<p>将式(3)中的 <img src="https://www.zhihu.com/equation?tex=y" alt="[公式]"> 视为类后验概率估计 <img src="https://www.zhihu.com/equation?tex=p+=+(y+=+1++%7C++x)" alt="[公式]"> ，则式(4)可重写为</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cln%5Cfrac%7Bp(y+=+1+%7C+x)%7D%7Bp(y=0+%7C+x)%7D=w%5E%7B%5Crm%7BT%7D%7Dx+b++++++%5Ctag%7B7%7D" alt="[公式]"></p>
+<p>将式(3)中的 <img src="https://www.zhihu.com/equation?tex=y" alt="[公式]"> 视为类后验概率估计 <img src="https://www.zhihu.com/equation?tex=p+%3D+%28y+%3D+1++%7C++x%29" alt="[公式]"> ，则式(4)可重写为</p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Cln%5Cfrac%7Bp%28y+%3D+1+%7C+x%29%7D%7Bp%28y%3D0+%7C+x%29%7D%3Dw%5E%7B%5Crm%7BT%7D%7Dx%2Bb++++++%5Ctag%7B7%7D" alt="[公式]"></p>
 <p>显然有：</p>
-<p><img src="https://www.zhihu.com/equation?tex=p(y=1%7Cx)=+%5Cfrac%7Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D+b%7D%7B1+e%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D+b%7D+%5Ctag%7B8%7D" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=p(y=0%7Cx)=+%5Cfrac%7B1%7D%7B1+e%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D+b%7D+%5Ctag%7B9%7D" alt="[公式]"></p>
-<p>注： <img src="https://www.zhihu.com/equation?tex=p(y=1%7Cx)+p(y=0%7Cx)=1" alt="[公式]"></p>
-<p>于是，我们可通过”极大似然法”（maximum likelihood method）来估计 <img src="https://www.zhihu.com/equation?tex=w" alt="[公式]"> 和 <img src="https://www.zhihu.com/equation?tex=b" alt="[公式]"> . 给定数据集 <img src="https://www.zhihu.com/equation?tex=%5C%7B(x_%7Bi%7D,+y_%7Bi%7D)%5C%7D%5E%7Bm%7D_%7Bi=1%7D" alt="[公式]"> ，对率回归模型最大化”对数似然”（log-likelihood）</p>
-<p><img src="https://www.zhihu.com/equation?tex=%E2%84%93(w,+b)=%5Csum_%7Bi=1%7D%5E%7Bm%7D%7B%5Cln+p(y_%7Bi%7D%7Cx_%7Bi%7D;w,b)%7D+%5Ctag%7B10%7D+" alt="[公式]"></p>
-<p>即令每个样本属于其真实标记的概率越大越好. 为便于讨论，令 <img src="https://www.zhihu.com/equation?tex=%5Cbeta=(w;b)" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=%5Chat%7Bx%7D=%7Bx;1%7D" alt="[公式]">, 则 <img src="https://www.zhihu.com/equation?tex=w%5E%7B%5Ctext%7BT%7D%7Dx+b" alt="[公式]"> 可以简写为 <img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7B%5Crm%7BT%7D%7D+%5Chat%7Bx%7D" alt="[公式]"> .<br>再令 <img src="https://www.zhihu.com/equation?tex=p_%7B1%7D(%5Chat%7Bx%7D;%5Cbeta)=p(y=1%7C%5Chat%7Bx%7D;%5Cbeta)%EF%BC%8Cp_%7B0%7D(%5Chat%7Bx%7D;%5Cbeta)=p(%7By=0%7C%5Chat%7Bx%7D;%5Cbeta%7D)=1-+p_%7B1%7D(%5Chat%7Bx%7D;%5Cbeta)" alt="[公式]"> , 则式(10)中的似然项可重写为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=p(y_%7Bi%7D%7Cx_%7Bi%7D;w,+b)=y_%7Bi%7Dp_%7B1%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta)+(1-y_%7Bi%7D)p_%7B0%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta)+%5Ctag%7B11%7D" alt="[公式]"></p>
-<p>注：似然项并不唯一，也可写成 <img src="https://www.zhihu.com/equation?tex=p(y_%7Bi%7D%7Cx_%7Bi%7D;w)=%5Bp_%7B1%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta)%5D%5E%7By_%7Bi%7D%7D%5Bp_%7B0%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta)%5D%5E%7B1-y_%7Bi%7D%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=p%28y%3D1%7Cx%29%3D+%5Cfrac%7Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D%2Bb%7D%7B1%2Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D%2Bb%7D+%5Ctag%7B8%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=p%28y%3D0%7Cx%29%3D+%5Cfrac%7B1%7D%7B1%2Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D%2Bb%7D+%5Ctag%7B9%7D" alt="[公式]"></p>
+<p>注： <img src="https://www.zhihu.com/equation?tex=p%28y%3D1%7Cx%29%2Bp%28y%3D0%7Cx%29%3D1" alt="[公式]"></p>
+<p>于是，我们可通过”极大似然法”（maximum likelihood method）来估计 <img src="https://www.zhihu.com/equation?tex=w" alt="[公式]"> 和 <img src="https://www.zhihu.com/equation?tex=b" alt="[公式]"> . 给定数据集 <img src="https://www.zhihu.com/equation?tex=%5C%7B%28x_%7Bi%7D%2C+y_%7Bi%7D%29%5C%7D%5E%7Bm%7D_%7Bi%3D1%7D" alt="[公式]"> ，对率回归模型最大化”对数似然”（log-likelihood）</p>
+<p><img src="https://www.zhihu.com/equation?tex=%E2%84%93%28w%2C+b%29%3D%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%7B%5Cln+p%28y_%7Bi%7D%7Cx_%7Bi%7D%3Bw%2Cb%29%7D+%5Ctag%7B10%7D+" alt="[公式]"></p>
+<p>即令每个样本属于其真实标记的概率越大越好. 为便于讨论，令 <img src="https://www.zhihu.com/equation?tex=%5Cbeta%3D%28w%3Bb%29" alt="[公式]"> ， <img src="https://www.zhihu.com/equation?tex=%5Chat%7Bx%7D%3D%7Bx%3B1%7D" alt="[公式]">, 则 <img src="https://www.zhihu.com/equation?tex=w%5E%7B%5Ctext%7BT%7D%7Dx%2Bb" alt="[公式]"> 可以简写为 <img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7B%5Crm%7BT%7D%7D+%5Chat%7Bx%7D" alt="[公式]"> .<br>再令 <img src="https://www.zhihu.com/equation?tex=p_%7B1%7D%28%5Chat%7Bx%7D%3B%5Cbeta%29%3Dp%28y%3D1%7C%5Chat%7Bx%7D%3B%5Cbeta%29%EF%BC%8Cp_%7B0%7D%28%5Chat%7Bx%7D%3B%5Cbeta%29%3Dp%28%7By%3D0%7C%5Chat%7Bx%7D%3B%5Cbeta%7D%29%3D1-+p_%7B1%7D%28%5Chat%7Bx%7D%3B%5Cbeta%29" alt="[公式]"> , 则式(10)中的似然项可重写为：</p>
+<p><img src="https://www.zhihu.com/equation?tex=p%28y_%7Bi%7D%7Cx_%7Bi%7D%3Bw%2C+b%29%3Dy_%7Bi%7Dp_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%2B%281-y_%7Bi%7D%29p_%7B0%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29+%5Ctag%7B11%7D" alt="[公式]"></p>
+<p>注：似然项并不唯一，也可写成 <img src="https://www.zhihu.com/equation?tex=p%28y_%7Bi%7D%7Cx_%7Bi%7D%3Bw%29%3D%5Bp_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%5D%5E%7By_%7Bi%7D%7D%5Bp_%7B0%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%5D%5E%7B1-y_%7Bi%7D%7D" alt="[公式]"></p>
 <p>将式(11)代入式(10)，并且由(8)(9)可知，最大化(10)等价于最小化：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%E2%84%93(w,+b)=%5Csum_%7Bi=1%7D%5E%7Bm%7D(-y_%7Bi%7D%5Cbeta%5E%7B%5Crm%7BT%7D%7D%5Chat%7Bx%7D_%7Bi%7D+%5Cln(1+e%5E%7B%5Cbeta%5E%7B%5Ctext%7BT%7D%7D%5Chat%7Bx%7D_%7Bi%7D%7D))+%5Ctag%7B12%7D" alt="[公式]"></p>
-<p>考虑： <img src="https://www.zhihu.com/equation?tex=y_%7Bi%7D+%5Cin+%5C%7B0,+1%5C%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=%E2%84%93%28w%2C+b%29%3D%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%28-y_%7Bi%7D%5Cbeta%5E%7B%5Crm%7BT%7D%7D%5Chat%7Bx%7D_%7Bi%7D%2B%5Cln%281%2Be%5E%7B%5Cbeta%5E%7B%5Ctext%7BT%7D%7D%5Chat%7Bx%7D_%7Bi%7D%7D%29%29+%5Ctag%7B12%7D" alt="[公式]"></p>
+<p>考虑： <img src="https://www.zhihu.com/equation?tex=y_%7Bi%7D+%5Cin+%5C%7B0%2C+1%5C%7D" alt="[公式]"></p>
 <p>式(12)是关于 <img src="https://www.zhihu.com/equation?tex=%5Cbeta" alt="[公式]"> 的高阶可导连续凸函数，根据凸优化理论，经典的数值优化算法如梯度下降法(gradient descent method)、牛顿法(Newton method)等都可求得其最优解，于是就得到:</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7B*%7D=%7B%5Cunderset+%7B%5Cbeta%7D%7B%5Coperatorname+%7Barg+min%7D%7D%7D%E2%84%93(%5Cbeta)+%5Ctag%7B13%7D" alt="[公式]"></p>
-<p>以牛顿法为例，其第 <img src="https://www.zhihu.com/equation?tex=t+1" alt="[公式]"> 轮迭代的更新公式为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7Bt+1%7D=%5Cbeta%5E%7Bt%7D-%5Cleft(%5Cfrac%7B%5Cpartial%5E%7B2%7D%E2%84%93+(%5Cbeta)%7D%7B%5Cpartial+%5Cbeta+%5Cpartial+%5Cbeta%5E%7B%5Ctext%7BT%7D%7D%7D%5Cright)%5E%7B-1%7D+%5Cfrac%7B%5Cpartial%E2%84%93+(%5Cbeta)%7D%7B%5Cpartial+%5Cbeta%7D+%5Ctag%7B14%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7B%2A%7D%3D%7B%5Cunderset+%7B%5Cbeta%7D%7B%5Coperatorname+%7Barg+min%7D%7D%7D%E2%84%93%28%5Cbeta%29+%5Ctag%7B13%7D" alt="[公式]"></p>
+<p>以牛顿法为例，其第 <img src="https://www.zhihu.com/equation?tex=t%2B1" alt="[公式]"> 轮迭代的更新公式为：</p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7Bt%2B1%7D%3D%5Cbeta%5E%7Bt%7D-%5Cleft%28%5Cfrac%7B%5Cpartial%5E%7B2%7D%E2%84%93+%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta+%5Cpartial+%5Cbeta%5E%7B%5Ctext%7BT%7D%7D%7D%5Cright%29%5E%7B-1%7D+%5Cfrac%7B%5Cpartial%E2%84%93+%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta%7D+%5Ctag%7B14%7D" alt="[公式]"></p>
 <p>其中关于 <img src="https://www.zhihu.com/equation?tex=%5Cbeta" alt="[公式]"> 的一阶、二阶导数分别为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+%5Cell(%5Cbeta)%7D%7B%5Cpartial+%5Cbeta%7D=-%5Csum_%7Bi=1%7D%5E%7Bm%7D%5Chat%7Bx%7D_%7Bi%7D(y_%7Bi%7D-p_%7B1%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta))+%5Ctag%7B15%7D" alt="[公式]"></p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial%5E%7B2%7D+%5Cell(%5Cbeta)%7D%7B%5Cpartial+%5Cbeta+%5Cpartial+%5Cbeta%5E%7B%5Crm%7BT%7D%7D%7D=%5Csum_%7Bi=1%7D%5E%7Bm%7D%5Chat%7Bx%7D_%7Bi%7D%5Chat%7Bx%7D%5E%7B%5Crm%7BT%7D%7D_%7Bi%7Dp_%7B1%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta)(1-p_%7B1%7D(%5Chat%7Bx%7D_%7Bi%7D;%5Cbeta))+%5Ctag%7B16%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+%5Cell%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta%7D%3D-%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%5Chat%7Bx%7D_%7Bi%7D%28y_%7Bi%7D-p_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%29+%5Ctag%7B15%7D" alt="[公式]"></p>
+<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial%5E%7B2%7D+%5Cell%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta+%5Cpartial+%5Cbeta%5E%7B%5Crm%7BT%7D%7D%7D%3D%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%5Chat%7Bx%7D_%7Bi%7D%5Chat%7Bx%7D%5E%7B%5Crm%7BT%7D%7D_%7Bi%7Dp_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%281-p_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%29+%5Ctag%7B16%7D" alt="[公式]"></p>
 <p>​    <a target="_blank" rel="noopener" href="https://www.quantinfo.com/Article/View/857.html">对数几率回归 —— Logistic Regression</a></p>
 <h4 id="（3）线性判别分析（LDA）"><a href="#（3）线性判别分析（LDA）" class="headerlink" title="（3）线性判别分析（LDA）"></a>（3）线性判别分析（LDA）</h4><p>​    【线性判别分析（Linear Discriminant Analysis，简称LDA）】是一种经典的【线性学习方法】，在【二分类问题】上因为最早由 Fisher，1936]提出，亦称“Fisher判别分析”</p>
 <p>​    <strong>思想：</strong>给定训练集，设法将样例投影到一条直线上，同类样例的投影点尽可能接近，异类样例的投影点尽可能远离（已有标签的投影，有监督的学习到这条直线).<img src="https://img2020.cnblogs.com/blog/1163900/202011/1163900-20201129064736038-699456951.png" alt="img" style="zoom: 33%;"></p>
@@ -1184,6 +1204,13 @@
 </main>
 
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1257,7 +1284,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">4.6k</span>
+                        class="white-color">2k</span>
             
             
             

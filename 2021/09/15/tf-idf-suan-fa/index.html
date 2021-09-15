@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="我的新世界, Terminal">
+    <meta name="keywords" content="TF-IDF算法, Terminal">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>我的新世界 | Terminal</title>
+    <title>TF-IDF算法 | Terminal</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -313,12 +313,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://pic4.zhimg.com/80/v2-a8ef32be2fe8bdf5b589e72458dc50bb_720w.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://pic3.zhimg.com/v2-af07eddbd536e21c2ad5b293d0df851f_1440w.jpg?source=172ae18b')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">我的新世界</h1>
+                    <h1 class="description center-align post-title">TF-IDF算法</h1>
                 </div>
             </div>
         </div>
@@ -432,12 +432,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/NLP/">
+                                <span class="chip bg-color">NLP</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/">
+                                <span class="chip bg-color">大数据分析与计算</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                机器学习
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -446,7 +463,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-09-14
+                    2021-09-15
                 </div>
                 
 
@@ -455,7 +472,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    37
+                    1k
                 </div>
                 
 
@@ -472,7 +489,116 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>​    花了半天新搞了一个博客，在这里主要是为了分享分享学习笔记，督促自己学习。</p>
+                <h2 id="1-TF-IDF算法介绍"><a href="#1-TF-IDF算法介绍" class="headerlink" title="1.TF-IDF算法介绍"></a>1.TF-IDF算法介绍</h2><p>​    <strong>TF-IDF（term frequency–inverse document frequency，词频-逆向文件频率）</strong>是一种用于信息检索（information retrieval）与文本挖掘（text mining）的常用<strong>加权技术</strong>，是一种统计方法。</p>
+<p>​    TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。<strong>字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。</strong></p>
+<p>​    <strong>TF-IDF的主要思想是</strong>：如果某个单词在一篇文章中出现的频率TF高，并且在其他文章中很少出现，则认为此词或者短语对于该篇文章具有很好的代表性。</p>
+<p>计算步骤：</p>
+<h4 id="（1）词频（TF）"><a href="#（1）词频（TF）" class="headerlink" title="（1）词频（TF）"></a>（1）词频（TF）</h4><p>​    <strong>TF(Term Frequency)</strong>代表词条在文章中出现的频率。</p>
+<p>​    这个数字通常会被归一化(一般是词频除以文章总词数), 以防止它偏向长的文件（同一个词语在长文件里可能会比短文件有更高的词频，而不管该词语重要与否）。</p>
+<p>​    TF的公式：</p>
+<script type="math/tex; mode=display">
+TF_{i,j}=\frac{n_{i,j}}{\sum_k n_{k,j}}</script><p>其中，$n_{i,j}$是词条$t_i$在文章$d_j$中出现的次数,$TF_{i.j}$就是表示词条$t_i$在文档中出现的频率。</p>
+<h4 id="（2）逆文件频率（IDF）"><a href="#（2）逆文件频率（IDF）" class="headerlink" title="（2）逆文件频率（IDF）"></a>（2）逆文件频率（IDF）</h4><p>​    <strong>IDF(Inverse Document Frequency)</strong>则代表该词条在所有文章中的普遍程度。</p>
+<p>​    如果包含词条$t$的文档越少, IDF越大，则说明词条具有很好的类别区分能力。</p>
+<p>​    IDF的公式：</p>
+<script type="math/tex; mode=display">
+IDF_i=log\frac{|D|}{1+|j:t_i\in d_j|}</script><p>​    其中，$|D|$表示所有文档的数量，$|j:t_i\in d_j|$表示包含词条$t_i$的文档数量，分母加1是为了<strong>防止包含词条$t_i$的文章数量为0导致分母为0</strong></p>
+<h4 id="（3）词频-逆向文件频率（TF-IDF）"><a href="#（3）词频-逆向文件频率（TF-IDF）" class="headerlink" title="（3）词频-逆向文件频率（TF-IDF）"></a>（3）词频-逆向文件频率（TF-IDF）</h4><p>​    某一特定文件内的高词频，以及该词语在所有文件中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于<strong>过滤掉常见的词语，保留重要的词语</strong>，表达为</p>
+<p>​                                                      <strong>TF-IF</strong>$=TF*IDF$</p>
+<hr>
+<h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h2><h4 id="1）python实现"><a href="#1）python实现" class="headerlink" title="(1）python实现"></a>(1）python实现</h4><pre class=" language-lang-python"><code class="language-lang-python"># corpus：语料库
+# words：对所有句子分词后的结果，[[], ...]
+# word_count：对每个句子进行词频统计， [{}, ...]
+# word_dict：每一个句子的词频统计结果， {}
+# word：每一个词，word_id
+# 
+import math
+from collections import defaultdict
+
+corpus = [
+    "what is the weather like today",
+    "what is for dinner tonight",
+    "this is a question worth pondering",
+    "it is a beautiful day today"
+]
+words = []
+# 对corpus分词
+for sentence in corpus:
+    words.append(sentence.strip().split())
+
+# 如果有自定义的停用词典，我们可以用下列方法来分词并去掉停用词
+# f = ["is", "the"]
+# for i in corpus:
+#     all_words = i.split()
+#     new_words = []
+#     for j in all_words:
+#         if j not in f:
+#             new_words.append(j)
+#     words.append(new_words)
+# print(words)
+
+# 进行词频统计
+def Counter(words):
+    word_count = []
+    for sentence in words:
+        word_dict = defaultdict(int)
+        for word in sentence:
+            word_dict[word] += 1
+        word_count.append(word_dict)
+    return word_count
+
+word_count = Counter(words)
+
+# 计算TF(word代表被计算的单词，word_dict是被计算单词所在句子分词统计词频后的字典)
+def tf(word, word_dict):
+    return word_dict[word] / sum(word_dict.values())
+
+# 统计含有该单词的句子数
+def count_sentence(word, word_count):
+    return sum([1 for i in word_count if i.get(word)])  # i[word] >= 1
+
+# 计算IDF
+def idf(word, word_count):
+    return math.log(len(word_count) / (count_sentence(word, word_count) + 1))
+
+# 计算TF-IDF
+def tfidf(word, word_dict, word_count):
+    return tf(word, word_dict) * idf(word, word_count)
+
+p = 1
+for word_dict in word_count:
+    print("part:{}".format(p))
+    p += 1
+    for word, cnt in word_dict.items():
+        print("word: {} --> TF-IDF:{}".format(word, tfidf(word, word_dict, word_count)))
+</code></pre>
+<h4 id="2-Sklearn实现"><a href="#2-Sklearn实现" class="headerlink" title="(2) Sklearn实现"></a>(2) Sklearn实现</h4><pre class=" language-lang-python"><code class="language-lang-python">from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import TfidfTransformer
+
+corpus = ['This is the first document.',
+           'This is the second second document.',
+           'And the third one.',
+           'Is this the first document?']
+
+#该类会将文本中的词语转换为词频矩阵，矩阵元素a[i][j] 表示j词在i类文本下的词频
+vectorizer = CountVectorizer()
+#该类会统计每个词语的tf-idf权值
+tf_idf_transformer = TfidfTransformer()
+#将文本转为词频tf矩阵并计算tf-idf
+count_vector = vectorizer.fit_transform(corpus)
+word = vectorizer.get_feature_names()
+print(word)
+tfidf = tf_idf_transformer.fit_transform(count_vector)
+#将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重
+print(tfidf.toarray())
+</code></pre>
+<hr>
+<h2 id="3-TF-IDF的应用场景"><a href="#3-TF-IDF的应用场景" class="headerlink" title="3. TF-IDF的应用场景"></a>3. TF-IDF的应用场景</h2><ul>
+<li>搜索引擎</li>
+<li>关键字提取</li>
+<li>文本相似性</li>
+<li>文本摘要</li>
+</ul>
 
                 
             </div>
@@ -499,7 +625,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://curlyxiao.github.io/2021/09/14/hello-world/">http://curlyxiao.github.io/2021/09/14/hello-world/</a>
+                    <a href="http://curlyxiao.github.io/2021/09/15/tf-idf-suan-fa/">http://curlyxiao.github.io/2021/09/15/tf-idf-suan-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -536,7 +662,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/NLP/">
+                                    <span class="chip bg-color">NLP</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/">
+                                    <span class="chip bg-color">大数据分析与计算</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -706,9 +840,63 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2021/09/15/tf-idf-suan-fa/">
+                    <div class="card-image">
+                        
+                        <img src="https://pic3.zhimg.com/v2-af07eddbd536e21c2ad5b293d0df851f_1440w.jpg?source=172ae18b" class="responsive-img" alt="TF-IDF算法">
+                        
+                        <span class="card-title">TF-IDF算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            NLP中TF-IDF词袋算法的一些课后笔记
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    机器学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/NLP/">
+                        <span class="chip bg-color">NLP</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E8%AE%A1%E7%AE%97/">
+                        <span class="chip bg-color">大数据分析与计算</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2021/09/14/xi-gua-shu-du-shu-bi-ji-1/">
                     <div class="card-image">
@@ -725,9 +913,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-09-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -752,43 +940,6 @@
                     </a>
                     
                 </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/09/14/hello-world/">
-                    <div class="card-image">
-                        
-                        <img src="https://pic4.zhimg.com/80/v2-a8ef32be2fe8bdf5b589e72458dc50bb_720w.jpg" class="responsive-img" alt="我的新世界">
-                        
-                        <span class="card-title">我的新世界</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-14
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Curly Xiao
-                            
-                        </span>
-                    </div>
-                </div>
-
                 
             </div>
         </div>
@@ -953,6 +1104,13 @@
 
 </main>
 
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 

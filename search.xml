@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>TF-IDF算法</title>
+      <link href="/2021/09/15/tf-idf-suan-fa/"/>
+      <url>/2021/09/15/tf-idf-suan-fa/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-TF-IDF算法介绍"><a href="#1-TF-IDF算法介绍" class="headerlink" title="1.TF-IDF算法介绍"></a>1.TF-IDF算法介绍</h2><p>​    <strong>TF-IDF（term frequency–inverse document frequency，词频-逆向文件频率）</strong>是一种用于信息检索（information retrieval）与文本挖掘（text mining）的常用<strong>加权技术</strong>，是一种统计方法。</p><p>​    TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。<strong>字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。</strong></p><p>​    <strong>TF-IDF的主要思想是</strong>：如果某个单词在一篇文章中出现的频率TF高，并且在其他文章中很少出现，则认为此词或者短语对于该篇文章具有很好的代表性。</p><p>计算步骤：</p><h4 id="（1）词频（TF）"><a href="#（1）词频（TF）" class="headerlink" title="（1）词频（TF）"></a>（1）词频（TF）</h4><p>​    <strong>TF(Term Frequency)</strong>代表词条在文章中出现的频率。</p><p>​    这个数字通常会被归一化(一般是词频除以文章总词数), 以防止它偏向长的文件（同一个词语在长文件里可能会比短文件有更高的词频，而不管该词语重要与否）。</p><p>​    TF的公式：</p><script type="math/tex; mode=display">TF_{i,j}=\frac{n_{i,j}}{\sum_k n_{k,j}}</script><p>其中，$n_{i,j}$是词条$t_i$在文章$d_j$中出现的次数,$TF_{i.j}$就是表示词条$t_i$在文档中出现的频率。</p><h4 id="（2）逆文件频率（IDF）"><a href="#（2）逆文件频率（IDF）" class="headerlink" title="（2）逆文件频率（IDF）"></a>（2）逆文件频率（IDF）</h4><p>​    <strong>IDF(Inverse Document Frequency)</strong>则代表该词条在所有文章中的普遍程度。</p><p>​    如果包含词条$t$的文档越少, IDF越大，则说明词条具有很好的类别区分能力。</p><p>​    IDF的公式：</p><script type="math/tex; mode=display">IDF_i=log\frac{|D|}{1+|j:t_i\in d_j|}</script><p>​    其中，$|D|$表示所有文档的数量，$|j:t_i\in d_j|$表示包含词条$t_i$的文档数量，分母加1是为了<strong>防止包含词条$t_i$的文章数量为0导致分母为0</strong></p><h4 id="（3）词频-逆向文件频率（TF-IDF）"><a href="#（3）词频-逆向文件频率（TF-IDF）" class="headerlink" title="（3）词频-逆向文件频率（TF-IDF）"></a>（3）词频-逆向文件频率（TF-IDF）</h4><p>​    某一特定文件内的高词频，以及该词语在所有文件中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于<strong>过滤掉常见的词语，保留重要的词语</strong>，表达为</p><p>​                                                      <strong>TF-IF</strong>$=TF*IDF$</p><hr><h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h2><h4 id="1）python实现"><a href="#1）python实现" class="headerlink" title="(1）python实现"></a>(1）python实现</h4><pre class=" language-lang-python"><code class="language-lang-python"># corpus：语料库# words：对所有句子分词后的结果，[[], ...]# word_count：对每个句子进行词频统计， [{}, ...]# word_dict：每一个句子的词频统计结果， {}# word：每一个词，word_id# import mathfrom collections import defaultdictcorpus = [    "what is the weather like today",    "what is for dinner tonight",    "this is a question worth pondering",    "it is a beautiful day today"]words = []# 对corpus分词for sentence in corpus:    words.append(sentence.strip().split())# 如果有自定义的停用词典，我们可以用下列方法来分词并去掉停用词# f = ["is", "the"]# for i in corpus:#     all_words = i.split()#     new_words = []#     for j in all_words:#         if j not in f:#             new_words.append(j)#     words.append(new_words)# print(words)# 进行词频统计def Counter(words):    word_count = []    for sentence in words:        word_dict = defaultdict(int)        for word in sentence:            word_dict[word] += 1        word_count.append(word_dict)    return word_countword_count = Counter(words)# 计算TF(word代表被计算的单词，word_dict是被计算单词所在句子分词统计词频后的字典)def tf(word, word_dict):    return word_dict[word] / sum(word_dict.values())# 统计含有该单词的句子数def count_sentence(word, word_count):    return sum([1 for i in word_count if i.get(word)])  # i[word] >= 1# 计算IDFdef idf(word, word_count):    return math.log(len(word_count) / (count_sentence(word, word_count) + 1))# 计算TF-IDFdef tfidf(word, word_dict, word_count):    return tf(word, word_dict) * idf(word, word_count)p = 1for word_dict in word_count:    print("part:{}".format(p))    p += 1    for word, cnt in word_dict.items():        print("word: {} --> TF-IDF:{}".format(word, tfidf(word, word_dict, word_count)))</code></pre><h4 id="2-Sklearn实现"><a href="#2-Sklearn实现" class="headerlink" title="(2) Sklearn实现"></a>(2) Sklearn实现</h4><pre class=" language-lang-python"><code class="language-lang-python">from sklearn.feature_extraction.text import CountVectorizerfrom sklearn.feature_extraction.text import TfidfTransformercorpus = ['This is the first document.',           'This is the second second document.',           'And the third one.',           'Is this the first document?']#该类会将文本中的词语转换为词频矩阵，矩阵元素a[i][j] 表示j词在i类文本下的词频vectorizer = CountVectorizer()#该类会统计每个词语的tf-idf权值tf_idf_transformer = TfidfTransformer()#将文本转为词频tf矩阵并计算tf-idfcount_vector = vectorizer.fit_transform(corpus)word = vectorizer.get_feature_names()print(word)tfidf = tf_idf_transformer.fit_transform(count_vector)#将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重print(tfidf.toarray())</code></pre><hr><h2 id="3-TF-IDF的应用场景"><a href="#3-TF-IDF的应用场景" class="headerlink" title="3. TF-IDF的应用场景"></a>3. TF-IDF的应用场景</h2><ul><li>搜索引擎</li><li>关键字提取</li><li>文本相似性</li><li>文本摘要</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> NLP </tag>
+            
+            <tag> 大数据分析与计算 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>西瓜书笔记</title>
       <link href="/2021/09/14/xi-gua-shu-du-shu-bi-ji-1/"/>
       <url>/2021/09/14/xi-gua-shu-du-shu-bi-ji-1/</url>
@@ -18,16 +45,24 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> 机器学习 </tag>
+            
+            <tag> 周志华西瓜书 </tag>
+            
+        </tags>
+      
     </entry>
     
     
     
     <entry>
-      <title>Hello World</title>
+      <title>我的新世界</title>
       <link href="/2021/09/14/hello-world/"/>
       <url>/2021/09/14/hello-world/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-lang-bash"><code class="language-lang-bash">$ hexo new "My New Post"</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-lang-bash"><code class="language-lang-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-lang-bash"><code class="language-lang-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-lang-bash"><code class="language-lang-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h1><p>​    花了半天新搞了一个博客，在这里主要是为了分享分享学习笔记，督促自己学习。</p>]]></content>
       
       
       

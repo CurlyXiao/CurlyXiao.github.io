@@ -32,7 +32,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Terminal" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 
@@ -484,6 +484,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -635,12 +638,11 @@ FPR=\frac{FP}{TN+FP}</script></li>
 <p>​    ROC曲线：</p>
 <p><img src="https://img-blog.csdnimg.cn/20200821162529454.png#pic_center" alt=""></p>
 <p>​    注：绿色的线代表该预测结果是个真正例，红色的线代表预测结果是个假正例,蓝色线段代表既新增了真正例也新增了假正例。</p>
-<pre class=" language-lang-markdown"><code class="language-lang-markdown">将分类阈值设为最大，TPR和FPR都为0，第一个点(0, 0)；
+<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">将分类阈值设为最大，TPR和FPR都为0，第一个点(0, 0)；
 将分类阈值依次设为每个样例的预测值，即依次将每个样例划分为正例；
 前一个标记点坐标记为（x， y）；
 若当前为真正例则对应的标记点坐标为（x, y + 1/m+），若当前为假正例则对应的标记点坐标为（x + 1/m-, y）；
-最后依次用线段相连相邻节点
-</code></pre>
+最后依次用线段相连相邻节点<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>==性能评价：==</p>
 <p>​    当我们评价多个预测器指标的时候，如果一个预测器的ROC完全<strong>包住</strong>了另外一个预测器的ROC，那么前者性能优于后者，但是如果有<strong>交叉</strong>的部分，就需要比较两者的AUC了。</p>
 <p>​    </p>

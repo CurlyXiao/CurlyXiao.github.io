@@ -32,7 +32,7 @@
 <meta name="generator" content="Hexo 5.4.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="Terminal" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+</head>
 
 
 
@@ -484,6 +484,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
 
         
 
@@ -506,92 +509,90 @@ IDF_i=log\frac{|D|}{1+|j:t_i\in d_j|}</script><p>​    其中，$|D|$表示所�
 <h4 id="（3）词频-逆向文件频率（TF-IDF）"><a href="#（3）词频-逆向文件频率（TF-IDF）" class="headerlink" title="（3）词频-逆向文件频率（TF-IDF）"></a>（3）词频-逆向文件频率（TF-IDF）</h4><p>​    某一特定文件内的高词频，以及该词语在所有文件中的低文件频率，可以产生出高权重的TF-IDF。因此，TF-IDF倾向于<strong>过滤掉常见的词语，保留重要的词语</strong>，表达为</p>
 <p>​                                                      <strong>TF-IF</strong>$=TF*IDF$</p>
 <hr>
-<h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h2><h4 id="1）python实现"><a href="#1）python实现" class="headerlink" title="(1）python实现"></a>(1）python实现</h4><pre class=" language-lang-python"><code class="language-lang-python"># corpus：语料库
-# words：对所有句子分词后的结果，[[], ...]
-# word_count：对每个句子进行词频统计， [{}, ...]
-# word_dict：每一个句子的词频统计结果， {}
-# word：每一个词，word_id
-# 
-import math
-from collections import defaultdict
+<h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h2><h4 id="1）python实现"><a href="#1）python实现" class="headerlink" title="(1）python实现"></a>(1）python实现</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token comment"># corpus：语料库</span>
+<span class="token comment"># words：对所有句子分词后的结果，[[], ...]</span>
+<span class="token comment"># word_count：对每个句子进行词频统计， [{}, ...]</span>
+<span class="token comment"># word_dict：每一个句子的词频统计结果， {}</span>
+<span class="token comment"># word：每一个词，word_id</span>
+<span class="token comment"># </span>
+<span class="token keyword">import</span> math
+<span class="token keyword">from</span> collections <span class="token keyword">import</span> defaultdict
+ 
+corpus <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">"what is the weather like today"</span><span class="token punctuation">,</span>
+    <span class="token string">"what is for dinner tonight"</span><span class="token punctuation">,</span>
+    <span class="token string">"this is a question worth pondering"</span><span class="token punctuation">,</span>
+    <span class="token string">"it is a beautiful day today"</span>
+<span class="token punctuation">]</span>
+words <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token comment"># 对corpus分词</span>
+<span class="token keyword">for</span> sentence <span class="token keyword">in</span> corpus<span class="token punctuation">:</span>
+    words<span class="token punctuation">.</span>append<span class="token punctuation">(</span>sentence<span class="token punctuation">.</span>strip<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 
-corpus = [
-    "what is the weather like today",
-    "what is for dinner tonight",
-    "this is a question worth pondering",
-    "it is a beautiful day today"
-]
-words = []
-# 对corpus分词
-for sentence in corpus:
-    words.append(sentence.strip().split())
-
-# 如果有自定义的停用词典，我们可以用下列方法来分词并去掉停用词
-# f = ["is", "the"]
-# for i in corpus:
-#     all_words = i.split()
-#     new_words = []
-#     for j in all_words:
-#         if j not in f:
-#             new_words.append(j)
-#     words.append(new_words)
-# print(words)
-
-# 进行词频统计
-def Counter(words):
-    word_count = []
-    for sentence in words:
-        word_dict = defaultdict(int)
-        for word in sentence:
-            word_dict[word] += 1
-        word_count.append(word_dict)
-    return word_count
-
-word_count = Counter(words)
-
-# 计算TF(word代表被计算的单词，word_dict是被计算单词所在句子分词统计词频后的字典)
-def tf(word, word_dict):
-    return word_dict[word] / sum(word_dict.values())
-
-# 统计含有该单词的句子数
-def count_sentence(word, word_count):
-    return sum([1 for i in word_count if i.get(word)])  # i[word] >= 1
-
-# 计算IDF
-def idf(word, word_count):
-    return math.log(len(word_count) / (count_sentence(word, word_count) + 1))
-
-# 计算TF-IDF
-def tfidf(word, word_dict, word_count):
-    return tf(word, word_dict) * idf(word, word_count)
-
-p = 1
-for word_dict in word_count:
-    print("part:{}".format(p))
-    p += 1
-    for word, cnt in word_dict.items():
-        print("word: {} --> TF-IDF:{}".format(word, tfidf(word, word_dict, word_count)))
-</code></pre>
-<h4 id="2-Sklearn实现"><a href="#2-Sklearn实现" class="headerlink" title="(2) Sklearn实现"></a>(2) Sklearn实现</h4><pre class=" language-lang-python"><code class="language-lang-python">from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
-
-corpus = ['This is the first document.',
-           'This is the second second document.',
-           'And the third one.',
-           'Is this the first document?']
-
-#该类会将文本中的词语转换为词频矩阵，矩阵元素a[i][j] 表示j词在i类文本下的词频
-vectorizer = CountVectorizer()
-#该类会统计每个词语的tf-idf权值
-tf_idf_transformer = TfidfTransformer()
-#将文本转为词频tf矩阵并计算tf-idf
-count_vector = vectorizer.fit_transform(corpus)
-word = vectorizer.get_feature_names()
-print(word)
-tfidf = tf_idf_transformer.fit_transform(count_vector)
-#将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重
-print(tfidf.toarray())
-</code></pre>
+<span class="token comment"># 如果有自定义的停用词典，我们可以用下列方法来分词并去掉停用词</span>
+<span class="token comment"># f = ["is", "the"]</span>
+<span class="token comment"># for i in corpus:</span>
+<span class="token comment">#     all_words = i.split()</span>
+<span class="token comment">#     new_words = []</span>
+<span class="token comment">#     for j in all_words:</span>
+<span class="token comment">#         if j not in f:</span>
+<span class="token comment">#             new_words.append(j)</span>
+<span class="token comment">#     words.append(new_words)</span>
+<span class="token comment"># print(words)</span>
+ 
+<span class="token comment"># 进行词频统计</span>
+<span class="token keyword">def</span> <span class="token function">Counter</span><span class="token punctuation">(</span>words<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    word_count <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> sentence <span class="token keyword">in</span> words<span class="token punctuation">:</span>
+        word_dict <span class="token operator">=</span> defaultdict<span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> word <span class="token keyword">in</span> sentence<span class="token punctuation">:</span>
+            word_dict<span class="token punctuation">[</span>word<span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token number">1</span>
+        word_count<span class="token punctuation">.</span>append<span class="token punctuation">(</span>word_dict<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> word_count
+ 
+word_count <span class="token operator">=</span> Counter<span class="token punctuation">(</span>words<span class="token punctuation">)</span>
+ 
+<span class="token comment"># 计算TF(word代表被计算的单词，word_dict是被计算单词所在句子分词统计词频后的字典)</span>
+<span class="token keyword">def</span> <span class="token function">tf</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_dict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> word_dict<span class="token punctuation">[</span>word<span class="token punctuation">]</span> <span class="token operator">/</span> <span class="token builtin">sum</span><span class="token punctuation">(</span>word_dict<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ 
+<span class="token comment"># 统计含有该单词的句子数</span>
+<span class="token keyword">def</span> <span class="token function">count_sentence</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> <span class="token builtin">sum</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> word_count <span class="token keyword">if</span> i<span class="token punctuation">.</span>get<span class="token punctuation">(</span>word<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>  <span class="token comment"># i[word] &gt;= 1</span>
+ 
+<span class="token comment"># 计算IDF</span>
+<span class="token keyword">def</span> <span class="token function">idf</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> math<span class="token punctuation">.</span>log<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>word_count<span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span>count_sentence<span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_count<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+ 
+<span class="token comment"># 计算TF-IDF</span>
+<span class="token keyword">def</span> <span class="token function">tfidf</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_dict<span class="token punctuation">,</span> word_count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> tf<span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_dict<span class="token punctuation">)</span> <span class="token operator">*</span> idf<span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_count<span class="token punctuation">)</span>
+ 
+p <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token keyword">for</span> word_dict <span class="token keyword">in</span> word_count<span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"part:{}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>p<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    p <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">for</span> word<span class="token punctuation">,</span> cnt <span class="token keyword">in</span> word_dict<span class="token punctuation">.</span>items<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"word: {} --&gt; TF-IDF:{}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> tfidf<span class="token punctuation">(</span>word<span class="token punctuation">,</span> word_dict<span class="token punctuation">,</span> word_count<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h4 id="2）Sklearn实现"><a href="#2）Sklearn实现" class="headerlink" title="(2）Sklearn实现"></a>(2）Sklearn实现</h4><pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_extraction<span class="token punctuation">.</span>text <span class="token keyword">import</span> CountVectorizer
+<span class="token keyword">from</span> sklearn<span class="token punctuation">.</span>feature_extraction<span class="token punctuation">.</span>text <span class="token keyword">import</span> TfidfTransformer
+ 
+corpus <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'This is the first document.'</span><span class="token punctuation">,</span>
+    	   <span class="token string">'This is the second second document.'</span><span class="token punctuation">,</span>
+    	   <span class="token string">'And the third one.'</span><span class="token punctuation">,</span>
+           <span class="token string">'Is this the first document?'</span><span class="token punctuation">]</span>
+ 
+<span class="token comment">#该类会将文本中的词语转换为词频矩阵，矩阵元素a[i][j] 表示j词在i类文本下的词频</span>
+vectorizer <span class="token operator">=</span> CountVectorizer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#该类会统计每个词语的tf-idf权值</span>
+tf_idf_transformer <span class="token operator">=</span> TfidfTransformer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">#将文本转为词频tf矩阵并计算tf-idf</span>
+count_vector <span class="token operator">=</span> vectorizer<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>corpus<span class="token punctuation">)</span>
+word <span class="token operator">=</span> vectorizer<span class="token punctuation">.</span>get_feature_names<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>word<span class="token punctuation">)</span>
+tfidf <span class="token operator">=</span> tf_idf_transformer<span class="token punctuation">.</span>fit_transform<span class="token punctuation">(</span>count_vector<span class="token punctuation">)</span>
+<span class="token comment">#将tf-idf矩阵抽取出来，元素a[i][j]表示j词在i类文本中的tf-idf权重</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>tfidf<span class="token punctuation">.</span>toarray<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <hr>
 <h2 id="3-TF-IDF的应用场景"><a href="#3-TF-IDF的应用场景" class="headerlink" title="3. TF-IDF的应用场景"></a>3. TF-IDF的应用场景</h2><ul>
 <li>搜索引擎</li>

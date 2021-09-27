@@ -740,53 +740,73 @@ X=\begin{pmatrix}
 <h3 id="3-2-分类任务"><a href="#3-2-分类任务" class="headerlink" title="3.2 分类任务"></a>3.2 分类任务</h3><h4 id="（2）对数几率回归"><a href="#（2）对数几率回归" class="headerlink" title="（2）对数几率回归"></a>（2）对数几率回归</h4><p>​    我们知道线性回归模型预测的是一个值，但如果我们要做的是分类任务呢？</p>
 <p>​    其实就是要找广义线性模型的”联系函数”(link function)，让这个函数将分类任务的真实标记与线性回归的预测值联系起来即可。</p>
 <p>​    考虑二分类任务，其输出标记 $y\in \{0,1\}$ ，而线性模型产生的预测值$z=\omega ^T+b$是实值，于是，我们需将转换$z$为 0/1值，最理想的是”单位阶跃函数”(unit-step function)</p>
-<p><img src="https://www.zhihu.com/equation?tex=y%3D+%5Cbegin%7Bcases%7D+0%2C+%26+z+%3C+0+%5C%5C%5C%5C+0.5%2C+%26z+%3D+0+%5C%5C%5C%5C+1%2C+%26z+%3E+0++%5Cend%7Bcases%7D+%5Ctag%7B1%7D" alt=""></p>
-<p>即若预测值 $z$大于零就判定为正例，小于零，则判定为反例，预测值如果为临界值零则可任意判别，如图1所示：</p>
+<script type="math/tex; mode=display">
+y=\left\{
+\begin{aligned}
+&0,&z<0\\&\\
+&0.5,&z=0&&&&&&&&&(1)\\&\\
+&1,&z>0
+\end{aligned}
+\right.</script><p>即若预测值 $z$大于零就判定为正例，小于零，则判定为反例，预测值如果为临界值零则可任意判别，如图1所示：</p>
 <p><img src="https://pic3.zhimg.com/80/v2-20318cc5094a39c05d812653a7ce087a_720w.jpg" alt="图1 单位跃阶函数与对数几率函数" style="zoom:50%;"></p>
 <p>单位阶跃函数不连续（影响后期求最优解[<strong>牛顿法，梯度下降法等</strong>]），于是我们希望找到能一定程度上近似单位阶跃函数的”替代函数”(surrogate function)，并希望它单调可微。对数几率函数(logistic function)正是这样的一个替代函数：</p>
-<p><img src="https://www.zhihu.com/equation?tex=y%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-z%7D%7D+%5Ctag%7B2%7D" alt=""></p>
-<p>对数几率函数是一种”Sigmoid函数”，它将$z$  值转化为一个接近0或1的 $y$ 值，并且在 $z=0$ 附近变化很陡.</p>
+<script type="math/tex; mode=display">
+y=\frac{1}{1+e^{-z}}\quad\quad\quad\quad(2)</script><p>对数几率函数是一种”Sigmoid函数”，它将$z$  值转化为一个接近0或1的 $y$ 值，并且在 $z=0$ 附近变化很陡.</p>
 <p>我们把 $z=\omega ^Tx+b$​ 代入到式(2)中，得：</p>
-<p><img src="https://www.zhihu.com/equation?tex=y%3D%5Cfrac%7B1%7D%7B1%2Be%5E%7B-%28w%5E%7B%5Crm%7BT%7D%7Dx%2Bb%29%7D%7D+%5Ctag%7B3%7D" alt=""></p>
-<p>式(3)可变化为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cln+%5Cfrac%7By%7D%7B1-y%7D%3Dw%5E%7B%5Crm%7BT%7D%7Dx%2Bb+%5Ctag%7B4%7D" alt=""></p>
-<p>若将 $y$ 视为样本$x$ 作为正例的可能性，则 $1-y$ 是其反例的可能性，两者的比值：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac%7By%7D%7B1-y%7D+%5Ctag%7B5%7D" alt=""></p>
-<p>称为”几率”(odds)，反映了$x$作为<strong>正例的相对可能性。</strong>对几率取对数得到<strong>对数几率</strong>(log odds，亦称logit)：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cln+%5Cfrac%7By%7D%7B1-y%7D+%5Ctag%7B6%7D" alt=""></p>
-<p>由此可知，式(3)实际是用线性回归模型的预测结果去逼近真实标记的对数几率。因此，其对应的模型简称为”对数几率回归”(logistic regression, 亦称 logit regression)，但实际却是一种分类学习方法。</p>
+<script type="math/tex; mode=display">
+y=\frac{1}{1+e^{-(\omega^Tx+b)}}\quad\quad\quad(3)</script><p>式(3)可变化为:</p>
+<script type="math/tex; mode=display">
+ln\frac{y}{1-y}=\omega^Tx+b\quad\quad\quad(4)</script><p>若将 $y$​ 视为样本$x$​ 作为正例的可能性，则 $1-y$​ 是其反例的可能性，两者的比值：</p>
+<script type="math/tex; mode=display">
+\frac{y}{1-y}\quad\quad\quad(5)</script><p>称为”几率”(odds)，反映了$x$作为<strong>正例的相对可能性。</strong>对几率取对数得到<strong>对数几率</strong>(log odds，亦称logit)：</p>
+<script type="math/tex; mode=display">
+ln\frac{y}{1-y}\quad\quad\quad(6)</script><p>由此可知，式(3)实际是用线性回归模型的预测结果去逼近真实标记的对数几率。因此，其对应的模型简称为”对数几率回归”(logistic regression, 亦称 logit regression)，但实际却是一种分类学习方法。</p>
 <p>这种方法有很多<strong>优点</strong>：</p>
 <p>① 它是直接对分类可能性进行建模，无需事先假设数据分布，这样就避免了假设分布不准确所带来的问题；<br>② 它不仅预测类别，也可得到近似概率预测，这对许多需利用概率辅助决策的任务很有用；<br>③ 对率回归求解的目标函数是任意阶可导的凸函数，有很好的数学性质，现有的许多数值优化算法都可直接用于求取<strong>最优解</strong>。</p>
 <p>如何确定式(3)的 $w$ 和$b$  ？</p>
-<p>将式(3)中的 $y$ 视为类后验概率估计 $p=(y=1|x)$，则式(4)可重写为</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cln%5Cfrac%7Bp%28y+%3D+1+%7C+x%29%7D%7Bp%28y%3D0+%7C+x%29%7D%3Dw%5E%7B%5Crm%7BT%7D%7Dx%2Bb++++++%5Ctag%7B7%7D" alt=""></p>
-<p>显然有：</p>
-<p><img src="https://www.zhihu.com/equation?tex=p%28y%3D1%7Cx%29%3D+%5Cfrac%7Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D%2Bb%7D%7B1%2Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D%2Bb%7D+%5Ctag%7B8%7D" alt=""></p>
-<p><img src="https://www.zhihu.com/equation?tex=p%28y%3D0%7Cx%29%3D+%5Cfrac%7B1%7D%7B1%2Be%5E%7Bw%5E%7B%5Ctext%7BT%7D%7Dx%7D%2Bb%7D+%5Ctag%7B9%7D" alt=""></p>
-<p>注： $p(y=1|x)+p(y=0|x)=1$</p>
+<p>将式(3)中的 $y$​ 视为类后验概率估计 $p=(y=1|x)$​，则式(4)可重写为</p>
+<script type="math/tex; mode=display">
+ln\frac{p(y=1|x)}{p(y=0|x)}=\omega^Tx+b\quad\quad\quad(7)</script><p>显然有：</p>
+<script type="math/tex; mode=display">
+p(y=1|x)=\frac{e^{\omega^Tx}+b}{1+e^{\omega^Tx}+b}\quad\quad\quad(8)\\
+p(y=0|x)=\frac{1}{1+e^{\omega^Tx}+b}\quad\quad\quad(9)</script><p>注： $p(y=1|x)+p(y=0|x)=1$</p>
 <p>于是，我们可通过”极大似然法”（maximum likelihood method）来估计$w$​ 和 $b$​​, 给定数据集${(x_i,y_i)}_{i=1}^m$​  ，对率回归模型最大化”对数似然”（log-likelihood)</p>
-<p><img src="https://www.zhihu.com/equation?tex=%E2%84%93%28w%2C+b%29%3D%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%7B%5Cln+p%28y_%7Bi%7D%7Cx_%7Bi%7D%3Bw%2Cb%29%7D+%5Ctag%7B10%7D+" alt=""></p>
-<p>即令每个样本属于其真实标记的概率越大越好. 为便于讨论，令$\beta =(\omega;b),\hat{x}=\{x;1\}$  , 则 $\omega ^Tx+b$ 可以简写为$\beta ^T\hat{x}$ .<br>再令$p_1(\hat{x};\beta)=p(y=1|\hat{x};\beta),p_0(\hat{x};\beta)=p(y=0|\hat{x};\beta)=1-p(y=1|\hat{x};\beta)$  , 则式(10)中的似然项可重写为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=p%28y_%7Bi%7D%7Cx_%7Bi%7D%3Bw%2C+b%29%3Dy_%7Bi%7Dp_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%2B%281-y_%7Bi%7D%29p_%7B0%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29+%5Ctag%7B11%7D" alt=""></p>
-<p>注：似然项并不唯一，也可写成$p(y_i|x_i;w)=[p_1(\hat{x_i};\beta)^{y_i}][p_0(\hat{x_i};\beta)^{1-y_i}]$ </p>
+<script type="math/tex; mode=display">
+\ell(\omega,b)=\sum_{i=1}^mlnp(y_i|x_i;\omega,b)\quad\quad\quad(10)</script><p>即令每个样本属于其真实标记的概率越大越好. 为便于讨论，令$\beta =(\omega;b),\hat{x}=\{x;1\}$​  , 则 $\omega ^Tx+b$​ 可以简写为$\beta ^T\hat{x}$​ .<br>再令$p_1(\hat{x};\beta)=p(y=1|\hat{x};\beta),p_0(\hat{x};\beta)=p(y=0|\hat{x};\beta)=1-p(y=1|\hat{x};\beta)$​  , 则上式中的似然项可重写为：</p>
+<script type="math/tex; mode=display">
+p(y_i|x_i;\omega,b)=y_ip_1(\hat{x}_i;\beta)+(1-y_i)p_0(\hat{x}_i;\beta)\quad\quad\quad(11)</script><p>注：似然项并不唯一，也可写成$p(y_i|x_i;w)=[p_1(\hat{x_i};\beta)^{y_i}][p_0(\hat{x_i};\beta)^{1-y_i}]$ </p>
 <p>将式(11)代入式(10)，并且由(8)(9)可知，最大化(10)等价于最小化：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%E2%84%93%28w%2C+b%29%3D%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%28-y_%7Bi%7D%5Cbeta%5E%7B%5Crm%7BT%7D%7D%5Chat%7Bx%7D_%7Bi%7D%2B%5Cln%281%2Be%5E%7B%5Cbeta%5E%7B%5Ctext%7BT%7D%7D%5Chat%7Bx%7D_%7Bi%7D%7D%29%29+%5Ctag%7B12%7D" alt=""></p>
-<p>考虑： $y_i\in \{0,1\}$</p>
+<script type="math/tex; mode=display">
+\ell(\omega,b)=\sum_{i=1}^m(-y_i\beta^T\hat{x}_i)+ln(1+e^{\beta^T\hat{x}_i}))\quad\quad\quad(12)</script><p>考虑： $y_i\in \{0,1\}$</p>
 <p>式(12)是关于 $\beta $ 的高阶可导连续凸函数，根据凸优化理论，经典的数值优化算法如梯度下降法(gradient descent method)、牛顿法(Newton method)等都可求得其最优解，于是就得到:</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7B%2A%7D%3D%7B%5Cunderset+%7B%5Cbeta%7D%7B%5Coperatorname+%7Barg+min%7D%7D%7D%E2%84%93%28%5Cbeta%29+%5Ctag%7B13%7D" alt=""></p>
-<p>以牛顿法为例，其第 $t+1$ 轮迭代的更新公式为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cbeta%5E%7Bt%2B1%7D%3D%5Cbeta%5E%7Bt%7D-%5Cleft%28%5Cfrac%7B%5Cpartial%5E%7B2%7D%E2%84%93+%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta+%5Cpartial+%5Cbeta%5E%7B%5Ctext%7BT%7D%7D%7D%5Cright%29%5E%7B-1%7D+%5Cfrac%7B%5Cpartial%E2%84%93+%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta%7D+%5Ctag%7B14%7D" alt=""></p>
-<p>其中关于$\beta $​的一阶、二阶导数分别为：</p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac+%7B%5Cpartial+%5Cell%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta%7D%3D-%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%5Chat%7Bx%7D_%7Bi%7D%28y_%7Bi%7D-p_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%29+%5Ctag%7B15%7D" alt=""></p>
-<p><img src="https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial%5E%7B2%7D+%5Cell%28%5Cbeta%29%7D%7B%5Cpartial+%5Cbeta+%5Cpartial+%5Cbeta%5E%7B%5Crm%7BT%7D%7D%7D%3D%5Csum_%7Bi%3D1%7D%5E%7Bm%7D%5Chat%7Bx%7D_%7Bi%7D%5Chat%7Bx%7D%5E%7B%5Crm%7BT%7D%7D_%7Bi%7Dp_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%281-p_%7B1%7D%28%5Chat%7Bx%7D_%7Bi%7D%3B%5Cbeta%29%29+%5Ctag%7B16%7D" alt=""></p>
-<p>​    <a target="_blank" rel="noopener" href="https://www.quantinfo.com/Article/View/857.html">对数几率回归 —— Logistic Regression</a></p>
+<script type="math/tex; mode=display">
+\beta^*=\mathop{arg\ min\ell(\beta)}\limits_\beta\quad\quad\quad(13)</script><p>以牛顿法为例，其第 $t+1$ 轮迭代的更新公式为：</p>
+<script type="math/tex; mode=display">
+\beta^{t+1}=\beta^t-(\frac{\partial^2\ell(\beta)}{\partial\beta\partial\beta^T})^{-1}\frac{\partial\ell(\beta)}{\partial\beta}\quad\quad\quad(14)</script><p>其中关于$\beta $​的一阶、二阶导数分别为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial\ell(\beta)}{\partial\beta}=-\sum_{i=1}^m\hat{x}_i(y_i-p_1(\hat{x}_i;\beta))\quad\quad\quad(15)\\
+\frac{\partial^2\ell(\beta)}{\partial\beta\partial\beta^T}=\sum_{i=1}^m\hat{x}_i\hat{x}_i^Tp_1(\hat{x}_i;\beta)(1-p_1(\hat{x}_i;\beta))\quad\quad\quad(16)</script><p>​    <a target="_blank" rel="noopener" href="https://www.quantinfo.com/Article/View/857.html">对数几率回归 —— Logistic Regression</a></p>
 <h4 id="（3）线性判别分析（LDA）"><a href="#（3）线性判别分析（LDA）" class="headerlink" title="（3）线性判别分析（LDA）"></a>（3）线性判别分析（LDA）</h4><p>​    【线性判别分析（Linear Discriminant Analysis，简称LDA）】是一种经典的【线性学习方法】，在【二分类问题】上因为最早由 Fisher，1936]提出，亦称“Fisher判别分析”</p>
 <p>​    <strong>思想：</strong>给定训练集，设法将样例投影到一条直线上，同类样例的投影点尽可能接近，异类样例的投影点尽可能远离（已有标签的投影，有监督的学习到这条直线).</p>
 <p><img src="https://img2020.cnblogs.com/blog/1163900/202011/1163900-20201129064736038-699456951.png" alt="" style="zoom: 33%;"></p>
 <p>​    对新样本分类时，将其投影到同样的这条直线上，根据投影点的位置来确定新样本的类别。</p>
 <p>​    <strong>因为特征向量的个数通常要远远少于原有数据特征的个数，因此线性判别分析也被视为一种经典的监督降维技术。</strong></p>
 <p>​    <a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6244265.html">线性判别分析LDA原理总结</a></p>
-
+<h3 id="3-3-多分类学习"><a href="#3-3-多分类学习" class="headerlink" title="3.3 多分类学习"></a>3.3 多分类学习</h3><h4 id="1-基本思路"><a href="#1-基本思路" class="headerlink" title="1.基本思路"></a>1.基本思路</h4><p>“拆解法”：将多分类任务拆分为若干个二分类问题</p>
+<h4 id="2-拆分策略"><a href="#2-拆分策略" class="headerlink" title="2. 拆分策略"></a>2. 拆分策略</h4><ul>
+<li><p>“一对一”（OvO)：将N个类别两两配对，从而产生N(N-1)/2个分类任务</p>
+<p>投票产生最终结果(即把被预测得最多的类别作为最终分类结果)</p>
+</li>
+<li><p>“一对其余”（OvR)：每次将一个类的样例作为正例、其他所有分类的样例作为反例来训练N个分类器</p>
+<p>仅有一个分类器预测为正类，则对应类别标记为最终分类结果；若多个分类器预测为正类，则选择置信度最大的类别标记作为分类结果</p>
+</li>
+<li><p>“多对多”（MvM)：每次将若干类作为正类，若干其它类作为反类</p>
+<p>常用方法：</p>
+<p><strong>ECOC(”纠错输出码“)</strong></p>
+<p>二元码（”+1“，”-1“分别表示正、反例）和三元码（比二元码多一个”0“停用类）</p>
+</li>
+</ul>
+<h3 id="3-4-类别不平衡问题"><a href="#3-4-类别不平衡问题" class="headerlink" title="3.4 类别不平衡问题"></a>3.4 类别不平衡问题</h3>
                 
             </div>
             <hr/>

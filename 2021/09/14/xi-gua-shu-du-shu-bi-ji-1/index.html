@@ -502,7 +502,7 @@
 <li>泛化能力：学得模型适用于新样本的能力</li>
 </ul>
 <div align="left">
-<img src="../../themes/matery/source/medias/bp/0.png">
+<img src="0.png" width="50%" height="40%">
 </div>
 
 
@@ -549,7 +549,7 @@
 <p>==特例== 留一法：数据集D含有m个样本，k=m,相当于只留出一个样本做测试集</p>
 <p>​                优点:较准确     缺点:计算开销非常大</p>
 <h4 id="03-自助法"><a href="#03-自助法" class="headerlink" title="03.自助法"></a>03.自助法</h4><p>​    每次从数据集$D$​中取一个样本，放回采样，重复m次，得到数据集$D^\prime$​ （ m个训练样本）​,</p>
-<p>​    $D^\prime$做训练集；$D/D^\prime$做测试集($D$中的一部分在$D^\prime$​​​中多次出现，而另一部分样本不出现)</p>
+<p>​    $D^\prime$​做训练集；$D/D^\prime$​做测试集$(D$​中的一部分在$D^\prime$​​​​中多次出现，而另一部分样本不出现$)$</p>
 <p>​        优点：比较适合小的、，难以有效划分训练集/测试集的数据集 </p>
 <p>​                    对集成学习等方法有很大用处</p>
 <p>​        缺点：改变了初始数据集的分布，导致会引入估计偏差</p>
@@ -576,7 +576,7 @@ P=\frac{TP}{TP+FP}</script><p>​    <strong>2.召回率：</strong>预测出来
 <script type="math/tex; mode=display">
 F=\frac{TP}{TP+FN}</script><p>​    <strong>准确率和召回率是一对矛盾的度量</strong></p>
 <p>​    <strong>3.P-R图</strong>（准确率-召回率曲线)：完全”包住“其他曲线的曲线越优，比如B优于C</p>
-<p><img src="../../themes/matery/source/medias/bp/1.png" alt="P-R图" style="zoom: 70%;"></p>
+<p><img src="1.png" alt="P-R图" style="zoom: 70%;"></p>
 <p>​    <strong>4. F1-Score</strong></p>
 <p>​    因为难以比较A和B孰优孰劣，所以有了几个综合考虑准确率、召回率的性能度量</p>
 <p>​    <strong>平衡点(BEP)</strong>：它是”准确率=召回率“时的取值（太过于简化了）</p>
@@ -803,7 +803,7 @@ p(y_i|x_i;\omega,b)=y_ip_1(\hat{x}_i;\beta)+(1-y_i)p_0(\hat{x}_i;\beta)\quad\qua
 </li>
 <li><p>“多对多”（MvM)：每次将若干类作为正类，若干其它类作为反类</p>
 <p>常用方法：</p>
-<p><strong>ECOC(‘’纠错输出码’’)</strong></p>
+<p><strong>ECOC( ‘’纠错输出码’’ )</strong></p>
 <p>二元码（”+1“，”-1“分别表示正、反例）和三元码（比二元码多一个”0“停用类）</p>
 </li>
 </ul>

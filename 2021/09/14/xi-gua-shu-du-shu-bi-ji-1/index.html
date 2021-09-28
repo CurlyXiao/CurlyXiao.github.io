@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="西瓜书笔记, Terminal">
+    <meta name="keywords" content="西瓜书笔记(1), Terminal">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>西瓜书笔记 | Terminal</title>
+    <title>西瓜书笔记(1) | Terminal</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,9 +29,9 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Terminal" type="application/atom+xml">
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="Terminal" type="application/atom+xml">
 </head>
 
 
@@ -318,7 +318,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">西瓜书笔记</h1>
+                    <h1 class="description center-align post-title">西瓜书笔记(1)</h1>
                 </div>
             </div>
         </div>
@@ -501,11 +501,7 @@
 <li>训练集、验证集、测试集</li>
 <li>泛化能力：学得模型适用于新样本的能力</li>
 </ul>
-<div align="left">
-<img src="0.png" width="50%" height="40%">
-</div>
-
-
+<p><img src="0.png#pic_center" alt=""></p>
 <h3 id="1-3-假设空间"><a href="#1-3-假设空间" class="headerlink" title="1.3 假设空间"></a>1.3 假设空间</h3><ul>
 <li>版本空间：有多个假设与训练集一致，即存在一个与训练集一致的“假设集合”</li>
 </ul>
@@ -518,7 +514,7 @@
 </li>
 </ul>
 <hr>
-<h2 id="第二章-模型的评估与选择"><a href="#第二章-模型的评估与选择" class="headerlink" title="第二章 模型的评估与选择"></a>第二章 模型的评估与选择</h2><p>==👏概要==：基本概念$\Longrightarrow$​模型的评估方法（数据集的划分）$\Longrightarrow$​不同的性能度量指标​</p>
+<h2 id="第二章-模型的评估与选择"><a href="#第二章-模型的评估与选择" class="headerlink" title="第二章 模型的评估与选择"></a>第二章 模型的评估与选择</h2><p><strong>👏概要</strong>：基本概念$\Longrightarrow$​​模型的评估方法（数据集的划分）$\Longrightarrow$​​不同的性能度量指标​</p>
 <h3 id="2-1-经验误差与过拟合"><a href="#2-1-经验误差与过拟合" class="headerlink" title="2.1 经验误差与过拟合"></a>2.1 经验误差与过拟合</h3><p>​    错误率、精度（1-错误率）、误差（训练误差（经验误差）、泛化误差）</p>
 <p>​    过拟合：模型在训练集上训练得太好了，以至于把训练样本自身的一些特点当成所有潜在样本的普遍性质</p>
 <p>​    欠拟合：对训练样本的一般性质尚未学好</p>
@@ -546,7 +542,7 @@
 <ul>
 <li>通常需要随机使用不同的划分重复<em>p</em>次，评估结果取均值</li>
 </ul>
-<p>==特例== 留一法：数据集D含有m个样本，k=m,相当于只留出一个样本做测试集</p>
+<p><strong>特例</strong> 留一法：数据集D含有m个样本，k=m,相当于只留出一个样本做测试集</p>
 <p>​                优点:较准确     缺点:计算开销非常大</p>
 <h4 id="03-自助法"><a href="#03-自助法" class="headerlink" title="03.自助法"></a>03.自助法</h4><p>​    每次从数据集$D$​中取一个样本，放回采样，重复m次，得到数据集$D^\prime$​ （ m个训练样本）​,</p>
 <p>​    $D^\prime$​做训练集；$D/D^\prime$​做测试集$(D$​中的一部分在$D^\prime$​​​​中多次出现，而另一部分样本不出现$)$</p>
@@ -584,14 +580,14 @@ F=\frac{TP}{TP+FN}</script><p>​    <strong>准确率和召回率是一对矛�
 <table>
 <thead>
 <tr>
-<th>F1-Score</th>
-<th></th>
+<th style="text-align:left">F1-Score</th>
+<th style="text-align:center"></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>基于查准率与查全率的调和平均</td>
-<td>$\frac{1}{F_1}=\frac{1}{2}·(\frac{1}{P}+\frac{1}{F})$​​  即：$F_1=\frac{2\times F\times R}{F+R}=\frac{2\times TP}{样本总数+TP-TN}$​​​​</td>
+<td style="text-align:left">F1-Score基于查准率与查全率的调和平均</td>
+<td style="text-align:center">$\frac{1}{F_1}=\frac{1}{2}·(\frac{1}{P}+\frac{1}{F})$  即：$F_1=\frac{2\times F\times R}{F+R}=\frac{2\times TP}{样本总数+TP-TN}$</td>
 </tr>
 </tbody>
 </table>
@@ -601,13 +597,13 @@ F=\frac{TP}{TP+FN}</script><p>​    <strong>准确率和召回率是一对矛�
 <thead>
 <tr>
 <th style="text-align:left">$F_\beta$</th>
-<th>$F_\beta=\frac{1}{1+\beta^2}·(\frac{1}{P}+\frac{\beta^2}{R})$</th>
+<th style="text-align:left">$F_\beta=\frac{1}{1+\beta^2}·(\frac{1}{P}+\frac{\beta^2}{R})$</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left">加权调和平均(表达出对准确率和召回率的不同偏好)</td>
-<td>其中，$\beta$度量了召回率对准确率的相对重要性，$\beta&gt;1$召回率更重要，$\beta&lt;1$准确率更重要</td>
+<td style="text-align:left">其中，$\beta$度量了召回率对准确率的相对重要性，$\beta&gt;1$召回率更重要，$\beta&lt;1$准确率更重要</td>
 </tr>
 </tbody>
 </table>
@@ -639,14 +635,12 @@ FPR=\frac{FP}{TN+FP}</script></li>
 <p>​    ROC曲线：</p>
 <p><img src="https://img-blog.csdnimg.cn/20200821162529454.png#pic_center" alt=""></p>
 <p>​    注：绿色的线代表该预测结果是个真正例，红色的线代表预测结果是个假正例,蓝色线段代表既新增了真正例也新增了假正例。</p>
-<pre class="line-numbers language-markdown" data-language="markdown"><code class="language-markdown">将分类阈值设为最大，TPR和FPR都为0，第一个点(0, 0)；
+<pre class="line-numbers language-latex" data-language="latex"><code class="language-latex">将分类阈值设为最大，TPR和FPR都为0，第一个点(0, 0)；
 将分类阈值依次设为每个样例的预测值，即依次将每个样例划分为正例；
 前一个标记点坐标记为（x， y）；
 若当前为真正例则对应的标记点坐标为（x, y + 1/m+），若当前为假正例则对应的标记点坐标为（x + 1/m-, y）；
 最后依次用线段相连相邻节点<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>==性能评价：==</p>
-<p>​    当我们评价多个预测器指标的时候，如果一个预测器的ROC完全<strong>包住</strong>了另外一个预测器的ROC，那么前者性能优于后者，但是如果有<strong>交叉</strong>的部分，就需要比较两者的AUC了。</p>
-<p>​    </p>
+<p>​        当我们评价多个预测器指标的时候，如果一个预测器的ROC完全<strong>包住</strong>了另外一个预测器的ROC，那么前者性能优于后者，但是如果有<strong>交叉</strong>的部分，就需要比较两者的AUC了。</p>
 <p><strong>2.AUC</strong></p>
 <p>​        AUC（Area Under ROC Curve），指的是ROC曲线下面的面积，用于评估ROC曲线的性能。</p>
 <script type="math/tex; mode=display">
@@ -656,26 +650,26 @@ AUC=\frac{1}{2}\sum_{i=1}^{m-1}(x_{i+1}-x_i)(y_i+y_{i+1})</script><p>​        
 ℓ_{rank}=\frac{1}{m^+m^-}\sum_{x^+\in D^+}\sum_{x^-\in D^-}(\mathbb I(f(x^+)<f(x^-))+\mathbb I(f(x^+)=f(x^-)))</script><p>​    即考虑每对正、反例，若正例的预测值小于反例，则记一个”罚分“，若相等，记0.5个罚分。</p>
 <p>​    <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43246110/article/details/104650262">推导过程</a></p>
 <p>​    容易有：$AUC=1-ℓ_{rank}$</p>
-<h5 id="（4）代价敏感错误率与代价曲线"><a href="#（4）代价敏感错误率与代价曲线" class="headerlink" title="（4）代价敏感错误率与代价曲线"></a>（4）代价敏感错误率与代价曲线</h5><p>​    不同类型的错误会造成不同的代价，因此为了权衡不同类型错误所造成的不同损失，可为错误赋予”非均等代价“。</p>
-<p>​    二分类问题中</p>
-<p>​    代价矩阵：</p>
+<h5 id="（4）代价敏感错误率与代价曲线"><a href="#（4）代价敏感错误率与代价曲线" class="headerlink" title="（4）代价敏感错误率与代价曲线"></a>（4）代价敏感错误率与代价曲线</h5><p>​        不同类型的错误会造成不同的代价，因此为了权衡不同类型错误所造成的不同损失，可为错误赋予”非均等代价“。</p>
+<p>​        二分类问题中</p>
+<p>​        代价矩阵：</p>
 <p><img src="https://pic3.zhimg.com/v2-851291a93a18d269c18f6de3033c36d2_r.jpg" alt=""></p>
-<p>​    ”代价敏感“错误率为：</p>
+<p>​        ”代价敏感“错误率为：</p>
 <script type="math/tex; mode=display">
-E(f;D;cost)=\frac{1}{m}(\sum_{x_i \in D^+}func(f(x_i)\neq y_i)*cost_{01}+\sum_{x_i \in D^-}func(f(x_i)\neq y_i)*cost_{10})</script><p>​    在非均等条件下，用<strong>”代价曲线“(Cost Curve)</strong>来反映出模型的期望总体代价</p>
-<p>​    代价曲线的横轴是取值为[0,1]的正例概率代价，其中$p$​是正例概率</p>
+E(f;D;cost)=\frac{1}{m}(\sum_{x_i \in D^+}func(f(x_i)\neq y_i)*cost_{01}+\sum_{x_i \in D^-}func(f(x_i)\neq y_i)*cost_{10})</script><p>​        在非均等条件下，用<strong>”代价曲线“(Cost Curve)</strong>来反映出模型的期望总体代价</p>
+<p>​        代价曲线的横轴是取值为[0,1]的正例概率代价，其中$p$是正例概率</p>
 <script type="math/tex; mode=display">
 \begin{equation}
 P(+)=\frac{p·cost_{0|1}}{p·cost_{0|1}+(1-p)·cost_{1|0}}    
-\end{equation}</script><p>​    纵轴是取值为[0,1]的归一化代价</p>
+\end{equation}</script><p>​        纵轴是取值为[0,1]的归一化代价</p>
 <script type="math/tex; mode=display">
 \begin{equation}
 cost_{norm}=\frac{FNR·p·cost_{0|1}+FPR·(1-p)·cost_{1|0}}{p·cost_{0|1}+(1-p)·cost_{1|0}}
-\end{equation}</script><p>​    式1代入式2：</p>
+\end{equation}</script><p>​        式1代入式2：</p>
 <script type="math/tex; mode=display">
-cost_{norm}=FNR·P(+)+FPR·(1-P(+))</script><p>​    代价曲线如下图所示：</p>
+cost_{norm}=FNR·P(+)+FPR·(1-P(+))</script><p>​        代价曲线如下图所示：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-009855d0fa9287349bf4c55964f7160e_720w.jpg?source=1940ef5c" alt="[代价曲线]"></p>
-<p>​    <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/63492375">代价曲线的理解？</a></p>
+<p>​        <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/63492375">代价曲线的理解？</a></p>
 <h3 id="2-4-比较检验"><a href="#2-4-比较检验" class="headerlink" title="2.4 比较检验"></a>2.4 比较检验</h3><p>​    泛化错误率的分布未知，但可通过测试错误率去推断</p>
 <h4 id="两种最基本的假设检验"><a href="#两种最基本的假设检验" class="headerlink" title="两种最基本的假设检验"></a>两种最基本的假设检验</h4><h5 id="（1）对单个模型泛化性能的假设检验"><a href="#（1）对单个模型泛化性能的假设检验" class="headerlink" title="（1）对单个模型泛化性能的假设检验"></a>（1）对单个模型泛化性能的假设检验</h5><p>​    1.”二项检验“</p>
 <p>​    2.“t检验”(针对多次训练/测试得到多个测试错误率的情况）</p>
@@ -698,7 +692,7 @@ E(f,D)=bias^2(x)+var(x)+\varepsilon^2</script><p>​    泛化误差可分解为
 <li>即泛化性能由算法的学习能力、数据的充分性以及学习任务本身的难度决定的</li>
 </ul>
 <p><strong>2.偏差-方差窘境：</strong></p>
-<p>​    下图给出了在模型训练不足时，拟合能力不够强，训练数据的扰动不足以使学习器产生显著变化，此时偏差主导泛化误差，此时称为欠拟合现象。当随着训练程度加深，模型的拟合能力增强，训练数据的扰动慢慢使得方差主导泛化误差。当训练充足时，模型的拟合能力非常强，数据轻微变化都能导致模型发生变化，如果过分学习训练数据的特点，则会发生过拟合。</p>
+<p>​        下图给出了在模型训练不足时，拟合能力不够强，训练数据的扰动不足以使学习器产生显著变化，此时偏差主导泛化误差，此时称为欠拟合现象。当随着训练程度加深，模型的拟合能力增强，训练数据的扰动慢慢使得方差主导泛化误差。当训练充足时，模型的拟合能力非常强，数据轻微变化都能导致模型发生变化，如果过分学习训练数据的特点，则会发生过拟合。</p>
 <ul>
 <li><p>针对欠拟合，我们提出集成学习的概念并且对于模型可以控制训练程度，比如神经网络加多隐层，或者决策树增加树深。<br>增加模型的迭代次数；更换描述能力更强的模型；生成更多特征供训练使用；降低正则化水平。</p>
 </li>
@@ -706,7 +700,7 @@ E(f,D)=bias^2(x)+var(x)+\varepsilon^2</script><p>​    泛化误差可分解为
 </li>
 </ul>
 <p>若模型复杂度大于平衡点，则模型的方差会偏高，模型倾向于过拟合；若模型复杂度小于平衡点，则模型的偏差会偏高，模型倾向于欠拟合。</p>
-<p><img src="https://images2018.cnblogs.com/blog/606386/201807/606386-20180722194316424-288674381.png" alt="bias-variance-tradeoff"></p>
+<p><img src="2.png" alt="bias-variance-tradeoff"></p>
 <p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27068705/answer/137487142">机器学习中的 Bias（偏差）、Error（误差）、Variance（方差）有什么区别和联系？</a></p>
 <hr>
 <h2 id="第三章-线性模型"><a href="#第三章-线性模型" class="headerlink" title="第三章 线性模型"></a>第三章 线性模型</h2><p>==👏概要==：线性回归$\Longrightarrow$对数几率回归$\Longrightarrow$线性判别分析$\Longrightarrow$多分类学习$\Longrightarrow$​类别不平衡问题</p>
@@ -789,7 +783,7 @@ p(y_i|x_i;\omega,b)=y_ip_1(\hat{x}_i;\beta)+(1-y_i)p_0(\hat{x}_i;\beta)\quad\qua
 \frac{\partial^2\ell(\beta)}{\partial\beta\partial\beta^T}=\sum_{i=1}^m\hat{x}_i\hat{x}_i^Tp_1(\hat{x}_i;\beta)(1-p_1(\hat{x}_i;\beta))\quad\quad\quad(16)</script><p>​    <a target="_blank" rel="noopener" href="https://www.quantinfo.com/Article/View/857.html">对数几率回归 —— Logistic Regression</a></p>
 <h4 id="（3）线性判别分析（LDA）"><a href="#（3）线性判别分析（LDA）" class="headerlink" title="（3）线性判别分析（LDA）"></a>（3）线性判别分析（LDA）</h4><p>​    【线性判别分析（Linear Discriminant Analysis，简称LDA）】是一种经典的【线性学习方法】，在【二分类问题】上因为最早由 Fisher，1936]提出，亦称“Fisher判别分析”</p>
 <p>​    <strong>思想：</strong>给定训练集，设法将样例投影到一条直线上，同类样例的投影点尽可能接近，异类样例的投影点尽可能远离（已有标签的投影，有监督的学习到这条直线).</p>
-<p><img src="https://img2020.cnblogs.com/blog/1163900/202011/1163900-20201129064736038-699456951.png" alt="" style="zoom: 33%;"></p>
+<p><img src="3.png" alt="" style="zoom: 33%;"></p>
 <p>​    对新样本分类时，将其投影到同样的这条直线上，根据投影点的位置来确定新样本的类别。</p>
 <p>​    <strong>因为特征向量的个数通常要远远少于原有数据特征的个数，因此线性判别分析也被视为一种经典的监督降维技术。</strong></p>
 <p>​    <a target="_blank" rel="noopener" href="https://www.cnblogs.com/pinard/p/6244265.html">线性判别分析LDA原理总结</a></p>
@@ -803,7 +797,7 @@ p(y_i|x_i;\omega,b)=y_ip_1(\hat{x}_i;\beta)+(1-y_i)p_0(\hat{x}_i;\beta)\quad\qua
 </li>
 <li><p>“多对多”（MvM)：每次将若干类作为正类，若干其它类作为反类</p>
 <p>常用方法：</p>
-<p><strong>ECOC( ‘’纠错输出码’’ )</strong></p>
+<p><strong>ECOC( “纠错输出码’’ )</strong></p>
 <p>二元码（”+1“，”-1“分别表示正、反例）和三元码（比二元码多一个”0“停用类）</p>
 </li>
 </ul>

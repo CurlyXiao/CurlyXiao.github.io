@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Terminal</title>
   
-  
+  <subtitle> AUM </subtitle>
   <link href="http://curlyxiao.github.io/atom.xml" rel="self"/>
   
   <link href="http://curlyxiao.github.io/"/>
-  <updated>2021-09-15T15:51:09.869Z</updated>
+  <updated>2022-05-24T08:03:00.339Z</updated>
   <id>http://curlyxiao.github.io/</id>
   
   <author>
@@ -15,6 +15,60 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>KMP算法</title>
+    <link href="http://curlyxiao.github.io/2022/05/08/chuan-de-mo-shi-pi-pei-suan-fa-kmp-suan-fa/"/>
+    <id>http://curlyxiao.github.io/2022/05/08/chuan-de-mo-shi-pi-pei-suan-fa-kmp-suan-fa/</id>
+    <published>2022-05-08T13:01:00.000Z</published>
+    <updated>2022-05-24T08:03:00.339Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;串的模式匹配算法——KMP算法&quot;&gt;&lt;a href=&quot;#串的模式匹配算法——KMP算法&quot; class=&quot;headerlink&quot; title=&quot;串的模式匹配算法——KMP算法&quot;&gt;&lt;/a&gt;串的模式匹配算法——KMP算法&lt;/h2&gt;&lt;h4</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构" scheme="http://curlyxiao.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+    <category term="数据结构" scheme="http://curlyxiao.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="算法" scheme="http://curlyxiao.github.io/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>西瓜书笔记二</title>
+    <link href="http://curlyxiao.github.io/2021/10/08/xi-gua-shu-du-shu-bi-ji-2/"/>
+    <id>http://curlyxiao.github.io/2021/10/08/xi-gua-shu-du-shu-bi-ji-2/</id>
+    <published>2021-10-08T13:01:00.000Z</published>
+    <updated>2022-05-24T07:12:06.015Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;第四章-决策树&quot;&gt;&lt;a href=&quot;#第四章-决策树&quot; class=&quot;headerlink&quot; title=&quot;第四章 决策树&quot;&gt;&lt;/a&gt;第四章 决策树&lt;/h2&gt;&lt;h4 id=&quot;4-1-基本流程&quot;&gt;&lt;a href=&quot;#4-1-基本流程&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="机器学习" scheme="http://curlyxiao.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="机器学习" scheme="http://curlyxiao.github.io/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="周志华西瓜书" scheme="http://curlyxiao.github.io/tags/%E5%91%A8%E5%BF%97%E5%8D%8E%E8%A5%BF%E7%93%9C%E4%B9%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>TF-IDF算法</title>
@@ -44,11 +98,11 @@
   </entry>
   
   <entry>
-    <title>西瓜书笔记(1)</title>
+    <title>西瓜书笔记一</title>
     <link href="http://curlyxiao.github.io/2021/09/14/xi-gua-shu-du-shu-bi-ji-1/"/>
     <id>http://curlyxiao.github.io/2021/09/14/xi-gua-shu-du-shu-bi-ji-1/</id>
     <published>2021-09-14T09:24:00.000Z</published>
-    <updated>2021-09-28T14:21:38.586Z</updated>
+    <updated>2021-09-28T14:53:10.185Z</updated>
     
     
       
